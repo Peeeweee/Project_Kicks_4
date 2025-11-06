@@ -1,0 +1,6 @@
+data_cleaning/
+instance/
+*.pyc
+__pycache__/
+.git/
+*.csv
