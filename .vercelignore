@@ -3,4 +3,6 @@ instance/
 *.pyc
 __pycache__/
 .git/
-*.csv
+.gitignore
+create_snapshot.py
+project_snapshot.txt

@@ -1,8 +1,7 @@
 PROJECT DIRECTORY TREE (Filtered View)
 ======================================================================
 Project_Kicks
-├── .claude
-│   └── settings.local.json
+├── .vercelignore
 ├── create_snapshot.py
 ├── dashboard
 │   ├── __init__.py
@@ -41,30 +40,20 @@ Project_Kicks
 │   ├── generate_report.py
 │   └── validation_report.py
 ├── instance
-├── nul
-└── run.py
+├── package-lock.json
+├── requirements.txt
+├── run.py
+└── vercel.json
 
 
---- START FILE: .claude\settings.local.json ---
-{
-  "permissions": {
-    "allow": [
-      "Bash(mkdir:*)",
-      "Bash(python app.py:*)",
-      "Bash(timeout:*)",
-      "Bash(curl http://127.0.0.1:5000)",
-      "Bash(netstat:*)",
-      "Bash(findstr:*)",
-      "Bash(python run.py:*)",
-      "Bash(python:*)",
-      "Bash(nul)",
-      "Bash(curl:*)"
-    ],
-    "deny": [],
-    "ask": []
-  }
-}
---- END FILE: .claude\settings.local.json ---
+--- START FILE: .vercelignore ---
+data_cleaning/
+instance/
+*.pyc
+__pycache__/
+.git/
+*.csv
+--- END FILE: .vercelignore ---
 
 --- START FILE: create_snapshot.py ---
 import os
@@ -13191,8 +13180,23 @@ if __name__ == "__main__":
     main()
 --- END FILE: data_cleaning\validation_report.py ---
 
---- START FILE: nul ---
---- END FILE: nul ---
+--- START FILE: package-lock.json ---
+{
+  "name": "Project_Kicks",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {}
+}
+--- END FILE: package-lock.json ---
+
+--- START FILE: requirements.txt ---
+Flask>=3.0.0
+pandas>=2.0.0
+plotly>=5.18.0
+numpy>=1.24.0
+Werkzeug>=3.0.0
+gunicorn
+--- END FILE: requirements.txt ---
 
 --- START FILE: run.py ---
 # /run.py
@@ -13205,4 +13209,27 @@ if __name__ == '__main__':
     # Using port 5001 as specified in the original app.py
     app.run(debug=True, host='0.0.0.0', port=5001)
 --- END FILE: run.py ---
+
+--- START FILE: vercel.json ---
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "run.py",
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.9",
+        "maxLambdaSize": "15mb",
+        "entrypoint": "gunicorn --bind 0.0.0.0:$PORT run:app"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "run.py"
+    }
+  ]
+}
+--- END FILE: vercel.json ---
 

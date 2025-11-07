@@ -3,12 +3,7 @@
   "builds": [
     {
       "src": "run.py",
-      "use": "@vercel/python",
-      "config": {
-        "runtime": "python3.9",
-        "maxLambdaSize": "15mb",
-        "entrypoint": "gunicorn --bind 0.0.0.0:$PORT run:app"
-      }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
