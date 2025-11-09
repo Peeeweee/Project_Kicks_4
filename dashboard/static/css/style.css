@@ -1214,3 +1214,97 @@ body {
 .modal-footer .btn:active {
     transform: translateY(0);
 }
+
+/* ============================================
+   FILTER SECTION STYLES
+   ============================================ */
+
+/* Loading Spinner Overlay */
+.chart-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.chart-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--secondary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 1000;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Filter Card Styling */
+.card.shadow-sm {
+    border: 1px solid var(--border-color);
+    transition: box-shadow 0.3s ease;
+}
+
+.card.shadow-sm:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Filter Form Controls */
+.form-select-sm {
+    border-color: var(--border-color);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-select-sm:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 87, 184, 0.25);
+}
+
+/* Filter Status Badge */
+#filterStatus {
+    display: inline-block;
+    padding: 0.25rem 0;
+    transition: all 0.3s ease;
+}
+
+/* Filter Button Styling */
+#applyFilters {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transition: all 0.3s ease;
+}
+
+#applyFilters:hover {
+    background-color: #004494;
+    border-color: #004494;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 87, 184, 0.3);
+}
+
+#applyFilters:active {
+    transform: translateY(0);
+}
+
+#resetFilters {
+    transition: all 0.3s ease;
+}
+
+#resetFilters:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+#resetFilters:active {
+    transform: translateY(0);
+}

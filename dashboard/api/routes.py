@@ -1,6 +1,6 @@
 # /dashboard/api/routes.py
 
-from flask import jsonify, current_app
+from flask import jsonify, current_app, request
 from . import bp
 import plotly.express as px
 import plotly.graph_objects as go
@@ -9,14 +9,53 @@ import json
 import plotly
 import pandas as pd
 
-# Note: All functions now access the dataframe and color constants 
+# Note: All functions now access the dataframe and color constants
 # via `current_app` instead of global variables.
+
+def apply_filters(df):
+    """
+    Apply filters from request parameters to the dataframe
+    Returns filtered dataframe
+    """
+    filtered_df = df.copy()
+
+    # Get filter parameters from request
+    year = request.args.get('year', '')
+    quarter = request.args.get('quarter', '')
+    region = request.args.get('region', '')
+    product = request.args.get('product', '')
+    retailer = request.args.get('retailer', '')
+    sales_method = request.args.get('sales_method', '')
+
+    # Apply filters if provided
+    if year:
+        filtered_df = filtered_df[filtered_df['Year'] == int(year)]
+
+    if quarter:
+        filtered_df = filtered_df[filtered_df['Quarter'] == int(quarter)]
+
+    if region:
+        filtered_df = filtered_df[filtered_df['Region'] == region]
+
+    if product:
+        filtered_df = filtered_df[filtered_df['Product'] == product]
+
+    if retailer:
+        filtered_df = filtered_df[filtered_df['Retailer'] == retailer]
+
+    if sales_method:
+        filtered_df = filtered_df[filtered_df['Sales Method'] == sales_method]
+
+    return filtered_df
 
 @bp.route('/sales-trend')
 def sales_trend():
     """API endpoint for sales trend over time"""
     df = current_app.df
     COLORS = current_app.COLORS
+
+    # Apply filters
+    df = apply_filters(df)
 
     # Group by month
     monthly_sales = df.groupby(df['Invoice Date'].dt.to_period('M')).agg({
@@ -95,6 +134,9 @@ def sales_by_region():
     df = current_app.df
     COLORS = current_app.COLORS
 
+    # Apply filters
+    df = apply_filters(df)
+
     region_sales = df.groupby('Region').agg({
         'Total Sales': 'sum',
         'Operating Profit': 'sum',
@@ -151,6 +193,9 @@ def product_performance():
     """API endpoint for product category performance"""
     df = current_app.df
     CHART_COLORS = current_app.CHART_COLORS
+
+    # Apply filters
+    df = apply_filters(df)
 
     product_sales = df.groupby('Product').agg({
         'Total Sales': 'sum',
@@ -223,6 +268,9 @@ def retailer_performance():
     df = current_app.df
     CHART_COLORS = current_app.CHART_COLORS
 
+    # Apply filters
+    df = apply_filters(df)
+
     retailer_sales = df.groupby('Retailer').agg({
         'Total Sales': 'sum',
         'Operating Profit': 'sum',
@@ -278,6 +326,9 @@ def sales_method():
     """API endpoint for sales by method"""
     df = current_app.df
     CHART_COLORS = current_app.CHART_COLORS
+
+    # Apply filters
+    df = apply_filters(df)
 
     method_sales = df.groupby('Sales Method').agg({
         'Total Sales': 'sum',
@@ -349,6 +400,9 @@ def top_states():
     df = current_app.df
     COLORS = current_app.COLORS
 
+    # Apply filters
+    df = apply_filters(df)
+
     state_sales = df.groupby('State').agg({
         'Total Sales': 'sum',
         'Operating Profit': 'sum',
@@ -405,6 +459,9 @@ def margin_analysis():
     """API endpoint for operating margin analysis"""
     df = current_app.df
     COLORS = current_app.COLORS
+
+    # Apply filters
+    df = apply_filters(df)
 
     product_margin = df.groupby('Product').agg({
         'Operating Margin': 'mean',
@@ -463,6 +520,9 @@ def quarterly_performance():
     """API endpoint for quarterly performance"""
     df = current_app.df
     COLORS = current_app.COLORS
+
+    # Apply filters
+    df = apply_filters(df)
 
     df['Year_Quarter'] = df['Year'].astype(str) + ' Q' + df['Quarter'].astype(str)
     quarterly = df.groupby('Year_Quarter').agg({
@@ -557,6 +617,9 @@ def price_distribution():
     df = current_app.df
     COLORS = current_app.COLORS
 
+    # Apply filters
+    df = apply_filters(df)
+
     # Enhanced histogram with gradient colors and better styling
     fig = go.Figure()
     fig.add_trace(go.Histogram(
@@ -642,6 +705,9 @@ def sales_by_retailer():
     """API endpoint for sales by retailer - Customer Patterns"""
     df = current_app.df
 
+    # Apply filters
+    df = apply_filters(df)
+
     retailer_sales = df.groupby('Retailer').agg({
         'Total Sales': 'sum',
         'Operating Profit': 'sum',
@@ -698,6 +764,9 @@ def sales_by_retailer():
 def sales_by_sales_method():
     """API endpoint for sales by sales method - Customer Patterns"""
     df = current_app.df
+
+    # Apply filters
+    df = apply_filters(df)
 
     method_sales = df.groupby('Sales Method').agg({
         'Total Sales': 'sum',
@@ -767,6 +836,9 @@ def sales_by_sales_method():
 def sales_by_state():
     df = current_app.df
     COLORS = current_app.COLORS
+
+    # Apply filters
+    df = apply_filters(df)
 
     # State name to abbreviation mapping
     state_abbrev = {
@@ -848,6 +920,9 @@ def sales_by_day_of_week():
     """API endpoint for sales by day of week - Customer Patterns"""
     df = current_app.df
 
+    # Apply filters
+    df = apply_filters(df)
+
     # Define proper day order
     day_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
@@ -914,6 +989,9 @@ def sales_by_day_of_week():
 def product_revenue_profit():
     """Product revenue and profit comparison - Product Analysis"""
     df = current_app.df
+
+    # Apply filters
+    df = apply_filters(df)
 
     product_data = df.groupby('Product').agg({
         'Total Sales': 'sum',
@@ -983,6 +1061,9 @@ def product_profitability_matrix():
     """Product profitability matrix: Margin vs Volume - Product Analysis"""
     df = current_app.df
 
+    # Apply filters
+    df = apply_filters(df)
+
     product_data = df.groupby('Product').agg({
         'Units Sold': 'sum',
         'Operating Margin': 'mean',
@@ -1051,6 +1132,9 @@ def product_by_sales_channel():
     """Product performance by sales channel - Product Analysis"""
     df = current_app.df
 
+    # Apply filters
+    df = apply_filters(df)
+
     channel_product = df.groupby(['Sales Method', 'Product']).agg({
         'Total Sales': 'sum',
         'Units Sold': 'sum'
@@ -1116,6 +1200,9 @@ def product_price_distribution():
     """Product price distribution by category - Product Analysis"""
     df = current_app.df
 
+    # Apply filters
+    df = apply_filters(df)
+
     # Purple/Orange theme for box plots
     purple_orange_colors = ['#7B1FA2', '#9C27B0', '#BA68C8', '#FF6F00', '#FF8F00', '#FFA726']
 
@@ -1171,6 +1258,9 @@ def product_price_distribution():
 def product_sales_trend():
     """Product sales trend over time - Product Analysis"""
     df = current_app.df
+
+    # Apply filters
+    df = apply_filters(df)
 
     df_copy = df.copy()
     df_copy['Year_Month'] = df_copy['Invoice Date'].dt.to_period('M').dt.to_timestamp()
@@ -1234,6 +1324,9 @@ def product_sales_trend():
 def product_regional_mix():
     """Product category mix by region"""
     df = current_app.df
+
+    # Apply filters
+    df = apply_filters(df)
 
     region_product = df.groupby(['Region', 'Product']).agg({
         'Total Sales': 'sum'

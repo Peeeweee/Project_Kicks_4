@@ -70,6 +70,100 @@
             {% if active_tab == 'sales-overview' %}
             <!-- Sales Overview Content -->
             <div id="sales-overview">
+                <!-- Filter Section -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Filters</h5>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" id="resetFilters">
+                                        <i class="fas fa-undo me-1"></i>Reset All
+                                    </button>
+                                </div>
+                                <div class="row g-3">
+                                    <!-- Year Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterYear" class="form-label small fw-bold">Year</label>
+                                        <select class="form-select form-select-sm" id="filterYear">
+                                            <option value="">All Years</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                        </select>
+                                    </div>
+                                    <!-- Quarter Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterQuarter" class="form-label small fw-bold">Quarter</label>
+                                        <select class="form-select form-select-sm" id="filterQuarter">
+                                            <option value="">All Quarters</option>
+                                            <option value="1">Q1</option>
+                                            <option value="2">Q2</option>
+                                            <option value="3">Q3</option>
+                                            <option value="4">Q4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Region Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterRegion" class="form-label small fw-bold">Region</label>
+                                        <select class="form-select form-select-sm" id="filterRegion">
+                                            <option value="">All Regions</option>
+                                            <option value="West">West</option>
+                                            <option value="Northeast">Northeast</option>
+                                            <option value="Southeast">Southeast</option>
+                                            <option value="South">South</option>
+                                            <option value="Midwest">Midwest</option>
+                                        </select>
+                                    </div>
+                                    <!-- Product Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterProduct" class="form-label small fw-bold">Product</label>
+                                        <select class="form-select form-select-sm" id="filterProduct">
+                                            <option value="">All Products</option>
+                                            <option value="Men's Street Footwear">Men's Street Footwear</option>
+                                            <option value="Men's Athletic Footwear">Men's Athletic Footwear</option>
+                                            <option value="Women's Street Footwear">Women's Street Footwear</option>
+                                            <option value="Women's Athletic Footwear">Women's Athletic Footwear</option>
+                                            <option value="Men's Apparel">Men's Apparel</option>
+                                            <option value="Women's Apparel">Women's Apparel</option>
+                                        </select>
+                                    </div>
+                                    <!-- Retailer Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterRetailer" class="form-label small fw-bold">Retailer</label>
+                                        <select class="form-select form-select-sm" id="filterRetailer">
+                                            <option value="">All Retailers</option>
+                                            <option value="Foot Locker">Foot Locker</option>
+                                            <option value="Sports Direct">Sports Direct</option>
+                                            <option value="West Gear">West Gear</option>
+                                            <option value="Kohl's">Kohl's</option>
+                                            <option value="Amazon">Amazon</option>
+                                            <option value="Walmart">Walmart</option>
+                                        </select>
+                                    </div>
+                                    <!-- Sales Method Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterSalesMethod" class="form-label small fw-bold">Sales Method</label>
+                                        <select class="form-select form-select-sm" id="filterSalesMethod">
+                                            <option value="">All Methods</option>
+                                            <option value="In-store">In-store</option>
+                                            <option value="Outlet">Outlet</option>
+                                            <option value="Online">Online</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary btn-sm" id="applyFilters">
+                                            <i class="fas fa-check me-1"></i>Apply Filters
+                                        </button>
+                                        <small class="text-muted ms-3" id="filterStatus">No filters applied</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- KPI Cards -->
                 <div class="row g-3 mb-4">
                     <div class="col-md-6 col-lg-3">
@@ -139,6 +233,100 @@
             {% elif active_tab == 'customer-patterns' %}
             <!-- Customer Patterns Content -->
             <div id="customer-patterns">
+                <!-- Filter Section -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Filters</h5>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" id="resetFiltersCustomer">
+                                        <i class="fas fa-undo me-1"></i>Reset All
+                                    </button>
+                                </div>
+                                <div class="row g-3">
+                                    <!-- Year Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterYearCustomer" class="form-label small fw-bold">Year</label>
+                                        <select class="form-select form-select-sm" id="filterYearCustomer">
+                                            <option value="">All Years</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                        </select>
+                                    </div>
+                                    <!-- Quarter Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterQuarterCustomer" class="form-label small fw-bold">Quarter</label>
+                                        <select class="form-select form-select-sm" id="filterQuarterCustomer">
+                                            <option value="">All Quarters</option>
+                                            <option value="1">Q1</option>
+                                            <option value="2">Q2</option>
+                                            <option value="3">Q3</option>
+                                            <option value="4">Q4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Region Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterRegionCustomer" class="form-label small fw-bold">Region</label>
+                                        <select class="form-select form-select-sm" id="filterRegionCustomer">
+                                            <option value="">All Regions</option>
+                                            <option value="West">West</option>
+                                            <option value="Northeast">Northeast</option>
+                                            <option value="Southeast">Southeast</option>
+                                            <option value="South">South</option>
+                                            <option value="Midwest">Midwest</option>
+                                        </select>
+                                    </div>
+                                    <!-- Product Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterProductCustomer" class="form-label small fw-bold">Product</label>
+                                        <select class="form-select form-select-sm" id="filterProductCustomer">
+                                            <option value="">All Products</option>
+                                            <option value="Men's Street Footwear">Men's Street Footwear</option>
+                                            <option value="Men's Athletic Footwear">Men's Athletic Footwear</option>
+                                            <option value="Women's Street Footwear">Women's Street Footwear</option>
+                                            <option value="Women's Athletic Footwear">Women's Athletic Footwear</option>
+                                            <option value="Men's Apparel">Men's Apparel</option>
+                                            <option value="Women's Apparel">Women's Apparel</option>
+                                        </select>
+                                    </div>
+                                    <!-- Retailer Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterRetailerCustomer" class="form-label small fw-bold">Retailer</label>
+                                        <select class="form-select form-select-sm" id="filterRetailerCustomer">
+                                            <option value="">All Retailers</option>
+                                            <option value="Foot Locker">Foot Locker</option>
+                                            <option value="Sports Direct">Sports Direct</option>
+                                            <option value="West Gear">West Gear</option>
+                                            <option value="Kohl's">Kohl's</option>
+                                            <option value="Amazon">Amazon</option>
+                                            <option value="Walmart">Walmart</option>
+                                        </select>
+                                    </div>
+                                    <!-- Sales Method Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterSalesMethodCustomer" class="form-label small fw-bold">Sales Method</label>
+                                        <select class="form-select form-select-sm" id="filterSalesMethodCustomer">
+                                            <option value="">All Methods</option>
+                                            <option value="In-store">In-store</option>
+                                            <option value="Outlet">Outlet</option>
+                                            <option value="Online">Online</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary btn-sm" id="applyFiltersCustomer">
+                                            <i class="fas fa-check me-1"></i>Apply Filters
+                                        </button>
+                                        <small class="text-muted ms-3" id="filterStatusCustomer">No filters applied</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row g-3 mb-4">
                     <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="sales-by-retailer-chart"><div id="sales-by-retailer-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                     <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="sales-by-sales-method-chart"><div id="sales-by-sales-method-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
@@ -154,6 +342,100 @@
             {% elif active_tab == 'product-analysis' %}
             <!-- Product Analysis Content -->
             <div id="product-analysis">
+                <!-- Filter Section -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="mb-0"><i class="fas fa-filter me-2"></i>Filters</h5>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" id="resetFiltersProduct">
+                                        <i class="fas fa-undo me-1"></i>Reset All
+                                    </button>
+                                </div>
+                                <div class="row g-3">
+                                    <!-- Year Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterYearProduct" class="form-label small fw-bold">Year</label>
+                                        <select class="form-select form-select-sm" id="filterYearProduct">
+                                            <option value="">All Years</option>
+                                            <option value="2020">2020</option>
+                                            <option value="2021">2021</option>
+                                        </select>
+                                    </div>
+                                    <!-- Quarter Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterQuarterProduct" class="form-label small fw-bold">Quarter</label>
+                                        <select class="form-select form-select-sm" id="filterQuarterProduct">
+                                            <option value="">All Quarters</option>
+                                            <option value="1">Q1</option>
+                                            <option value="2">Q2</option>
+                                            <option value="3">Q3</option>
+                                            <option value="4">Q4</option>
+                                        </select>
+                                    </div>
+                                    <!-- Region Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterRegionProduct" class="form-label small fw-bold">Region</label>
+                                        <select class="form-select form-select-sm" id="filterRegionProduct">
+                                            <option value="">All Regions</option>
+                                            <option value="West">West</option>
+                                            <option value="Northeast">Northeast</option>
+                                            <option value="Southeast">Southeast</option>
+                                            <option value="South">South</option>
+                                            <option value="Midwest">Midwest</option>
+                                        </select>
+                                    </div>
+                                    <!-- Product Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterProductProduct" class="form-label small fw-bold">Product</label>
+                                        <select class="form-select form-select-sm" id="filterProductProduct">
+                                            <option value="">All Products</option>
+                                            <option value="Men's Street Footwear">Men's Street Footwear</option>
+                                            <option value="Men's Athletic Footwear">Men's Athletic Footwear</option>
+                                            <option value="Women's Street Footwear">Women's Street Footwear</option>
+                                            <option value="Women's Athletic Footwear">Women's Athletic Footwear</option>
+                                            <option value="Men's Apparel">Men's Apparel</option>
+                                            <option value="Women's Apparel">Women's Apparel</option>
+                                        </select>
+                                    </div>
+                                    <!-- Retailer Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterRetailerProduct" class="form-label small fw-bold">Retailer</label>
+                                        <select class="form-select form-select-sm" id="filterRetailerProduct">
+                                            <option value="">All Retailers</option>
+                                            <option value="Foot Locker">Foot Locker</option>
+                                            <option value="Sports Direct">Sports Direct</option>
+                                            <option value="West Gear">West Gear</option>
+                                            <option value="Kohl's">Kohl's</option>
+                                            <option value="Amazon">Amazon</option>
+                                            <option value="Walmart">Walmart</option>
+                                        </select>
+                                    </div>
+                                    <!-- Sales Method Filter -->
+                                    <div class="col-md-6 col-lg-2">
+                                        <label for="filterSalesMethodProduct" class="form-label small fw-bold">Sales Method</label>
+                                        <select class="form-select form-select-sm" id="filterSalesMethodProduct">
+                                            <option value="">All Methods</option>
+                                            <option value="In-store">In-store</option>
+                                            <option value="Outlet">Outlet</option>
+                                            <option value="Online">Online</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary btn-sm" id="applyFiltersProduct">
+                                            <i class="fas fa-check me-1"></i>Apply Filters
+                                        </button>
+                                        <small class="text-muted ms-3" id="filterStatusProduct">No filters applied</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Product KPI Cards -->
                 <div class="row g-3 mb-4">
                     <div class="col-md-3">
@@ -467,30 +749,150 @@
 
     <!-- Custom JavaScript -->
     <script>
+        // Store current filter parameters
+        let currentFilters = {};
+        let currentFiltersCustomer = {};
+        let currentFiltersProduct = {};
+
         document.addEventListener('DOMContentLoaded', function() {
             // Check which tab is active and load content accordingly
             const activeTab = "{{ active_tab }}";
             if (activeTab === 'sales-overview') {
                 loadAllSalesCharts();
+
+                // Setup filter event listeners
+                document.getElementById('applyFilters').addEventListener('click', applyFilters);
+                document.getElementById('resetFilters').addEventListener('click', resetFilters);
             } else if (activeTab === 'customer-patterns') {
                 loadCustomerCharts();
+
+                // Setup filter event listeners for Customer page
+                document.getElementById('applyFiltersCustomer').addEventListener('click', applyFiltersCustomer);
+                document.getElementById('resetFiltersCustomer').addEventListener('click', resetFiltersCustomer);
             } else if (activeTab === 'product-analysis') {
                 loadProductCharts();
+
+                // Setup filter event listeners for Product page
+                document.getElementById('applyFiltersProduct').addEventListener('click', applyFiltersProduct);
+                document.getElementById('resetFiltersProduct').addEventListener('click', resetFiltersProduct);
             }
         });
 
+        // Apply filters and reload charts
+        function applyFilters() {
+            // Get filter values
+            const year = document.getElementById('filterYear').value;
+            const quarter = document.getElementById('filterQuarter').value;
+            const region = document.getElementById('filterRegion').value;
+            const product = document.getElementById('filterProduct').value;
+            const retailer = document.getElementById('filterRetailer').value;
+            const salesMethod = document.getElementById('filterSalesMethod').value;
+
+            // Build filter object
+            currentFilters = {};
+            if (year) currentFilters.year = year;
+            if (quarter) currentFilters.quarter = quarter;
+            if (region) currentFilters.region = region;
+            if (product) currentFilters.product = product;
+            if (retailer) currentFilters.retailer = retailer;
+            if (salesMethod) currentFilters.sales_method = salesMethod;
+
+            // Update filter status
+            updateFilterStatus();
+
+            // Add loading state to all chart cards
+            document.querySelectorAll('.chart-card').forEach(card => {
+                card.classList.add('chart-loading');
+            });
+
+            // Disable filter buttons during loading
+            document.getElementById('applyFilters').disabled = true;
+            document.getElementById('resetFilters').disabled = true;
+
+            // Reload all sales charts with filters
+            loadAllSalesCharts().then(() => {
+                // Remove loading state from all chart cards
+                document.querySelectorAll('.chart-card').forEach(card => {
+                    card.classList.remove('chart-loading');
+                });
+
+                // Re-enable filter buttons
+                document.getElementById('applyFilters').disabled = false;
+                document.getElementById('resetFilters').disabled = false;
+            });
+        }
+
+        // Reset filters and reload charts
+        function resetFilters() {
+            // Clear all filter selections
+            document.getElementById('filterYear').value = '';
+            document.getElementById('filterQuarter').value = '';
+            document.getElementById('filterRegion').value = '';
+            document.getElementById('filterProduct').value = '';
+            document.getElementById('filterRetailer').value = '';
+            document.getElementById('filterSalesMethod').value = '';
+
+            // Clear filter object
+            currentFilters = {};
+
+            // Update filter status
+            updateFilterStatus();
+
+            // Add loading state to all chart cards
+            document.querySelectorAll('.chart-card').forEach(card => {
+                card.classList.add('chart-loading');
+            });
+
+            // Disable filter buttons during loading
+            document.getElementById('applyFilters').disabled = true;
+            document.getElementById('resetFilters').disabled = true;
+
+            // Reload all sales charts without filters
+            loadAllSalesCharts().then(() => {
+                // Remove loading state from all chart cards
+                document.querySelectorAll('.chart-card').forEach(card => {
+                    card.classList.remove('chart-loading');
+                });
+
+                // Re-enable filter buttons
+                document.getElementById('applyFilters').disabled = false;
+                document.getElementById('resetFilters').disabled = false;
+            });
+        }
+
+        // Update filter status message
+        function updateFilterStatus() {
+            const filterCount = Object.keys(currentFilters).length;
+            const statusElement = document.getElementById('filterStatus');
+
+            if (filterCount === 0) {
+                statusElement.textContent = 'No filters applied';
+                statusElement.className = 'text-muted ms-3';
+            } else {
+                statusElement.textContent = `${filterCount} filter${filterCount > 1 ? 's' : ''} applied`;
+                statusElement.className = 'text-success ms-3 fw-bold';
+            }
+        }
+
+        // Build query string from current filters
+        function getFilterQueryString() {
+            const params = new URLSearchParams(currentFilters);
+            return params.toString() ? '?' + params.toString() : '';
+        }
+
         async function loadAllSalesCharts() {
             try {
+                const filterQuery = getFilterQueryString();
                 await Promise.all([
-                    loadChart('/api/sales-trend', 'sales-trend-chart'),
-                    loadChart('/api/sales-by-region', 'region-chart'),
-                    loadChart('/api/product-performance', 'product-chart'),
-                    loadChart('/api/retailer-performance', 'retailer-chart'),
-                    loadChart('/api/sales-method', 'sales-method-chart'),
-                    loadChart('/api/top-states', 'top-states-chart'),
-                    loadChart('/api/margin-analysis', 'margin-chart'),
-                    loadChart('/api/quarterly-performance', 'quarterly-chart'),
-                    loadChart('/api/price-distribution', 'price-distribution-chart')
+                    loadChart('/api/sales-trend' + filterQuery, 'sales-trend-chart'),
+                    loadChart('/api/sales-by-region' + filterQuery, 'region-chart'),
+                    loadChart('/api/product-performance' + filterQuery, 'product-chart'),
+                    loadChart('/api/retailer-performance' + filterQuery, 'retailer-chart'),
+                    loadChart('/api/sales-method' + filterQuery, 'sales-method-chart'),
+                    loadChart('/api/top-states' + filterQuery, 'top-states-chart'),
+                    loadChart('/api/margin-analysis' + filterQuery, 'margin-chart'),
+                    loadChart('/api/quarterly-performance' + filterQuery, 'quarterly-chart'),
+                    loadChart('/api/price-distribution' + filterQuery, 'price-distribution-chart')
                 ]);
                 console.log('All sales charts loaded successfully!');
             } catch (error) {
@@ -498,13 +900,97 @@
             }
         }
 
+        // Customer Page Filter Functions
+        function applyFiltersCustomer() {
+            const year = document.getElementById('filterYearCustomer').value;
+            const quarter = document.getElementById('filterQuarterCustomer').value;
+            const region = document.getElementById('filterRegionCustomer').value;
+            const product = document.getElementById('filterProductCustomer').value;
+            const retailer = document.getElementById('filterRetailerCustomer').value;
+            const salesMethod = document.getElementById('filterSalesMethodCustomer').value;
+
+            currentFiltersCustomer = {};
+            if (year) currentFiltersCustomer.year = year;
+            if (quarter) currentFiltersCustomer.quarter = quarter;
+            if (region) currentFiltersCustomer.region = region;
+            if (product) currentFiltersCustomer.product = product;
+            if (retailer) currentFiltersCustomer.retailer = retailer;
+            if (salesMethod) currentFiltersCustomer.sales_method = salesMethod;
+
+            updateFilterStatusCustomer();
+
+            document.querySelectorAll('#customer-patterns .chart-card').forEach(card => {
+                card.classList.add('chart-loading');
+            });
+
+            document.getElementById('applyFiltersCustomer').disabled = true;
+            document.getElementById('resetFiltersCustomer').disabled = true;
+
+            loadCustomerCharts().then(() => {
+                document.querySelectorAll('#customer-patterns .chart-card').forEach(card => {
+                    card.classList.remove('chart-loading');
+                });
+
+                document.getElementById('applyFiltersCustomer').disabled = false;
+                document.getElementById('resetFiltersCustomer').disabled = false;
+            });
+        }
+
+        function resetFiltersCustomer() {
+            document.getElementById('filterYearCustomer').value = '';
+            document.getElementById('filterQuarterCustomer').value = '';
+            document.getElementById('filterRegionCustomer').value = '';
+            document.getElementById('filterProductCustomer').value = '';
+            document.getElementById('filterRetailerCustomer').value = '';
+            document.getElementById('filterSalesMethodCustomer').value = '';
+
+            currentFiltersCustomer = {};
+
+            updateFilterStatusCustomer();
+
+            document.querySelectorAll('#customer-patterns .chart-card').forEach(card => {
+                card.classList.add('chart-loading');
+            });
+
+            document.getElementById('applyFiltersCustomer').disabled = true;
+            document.getElementById('resetFiltersCustomer').disabled = true;
+
+            loadCustomerCharts().then(() => {
+                document.querySelectorAll('#customer-patterns .chart-card').forEach(card => {
+                    card.classList.remove('chart-loading');
+                });
+
+                document.getElementById('applyFiltersCustomer').disabled = false;
+                document.getElementById('resetFiltersCustomer').disabled = false;
+            });
+        }
+
+        function updateFilterStatusCustomer() {
+            const filterCount = Object.keys(currentFiltersCustomer).length;
+            const statusElement = document.getElementById('filterStatusCustomer');
+
+            if (filterCount === 0) {
+                statusElement.textContent = 'No filters applied';
+                statusElement.className = 'text-muted ms-3';
+            } else {
+                statusElement.textContent = `${filterCount} filter${filterCount > 1 ? 's' : ''} applied`;
+                statusElement.className = 'text-success ms-3 fw-bold';
+            }
+        }
+
+        function getFilterQueryStringCustomer() {
+            const params = new URLSearchParams(currentFiltersCustomer);
+            return params.toString() ? '?' + params.toString() : '';
+        }
+
         async function loadCustomerCharts() {
             try {
+                const filterQuery = getFilterQueryStringCustomer();
                 await Promise.all([
-                    loadChart('{{ url_for('api.sales_by_retailer') }}', 'sales-by-retailer-chart'),
-                    loadChart('{{ url_for('api.sales_by_sales_method') }}', 'sales-by-sales-method-chart'),
-                    loadChart('{{ url_for('api.sales_by_state') }}', 'sales-by-state-chart'),
-                    loadChart('{{ url_for('api.sales_by_day_of_week') }}', 'sales-by-day-of-week-chart')
+                    loadChart('{{ url_for('api.sales_by_retailer') }}' + filterQuery, 'sales-by-retailer-chart'),
+                    loadChart('{{ url_for('api.sales_by_sales_method') }}' + filterQuery, 'sales-by-sales-method-chart'),
+                    loadChart('{{ url_for('api.sales_by_state') }}' + filterQuery, 'sales-by-state-chart'),
+                    loadChart('{{ url_for('api.sales_by_day_of_week') }}' + filterQuery, 'sales-by-day-of-week-chart')
                 ]);
                 console.log('All customer charts loaded successfully!');
             } catch (error) {
@@ -512,15 +998,99 @@
             }
         }
 
+        // Product Page Filter Functions
+        function applyFiltersProduct() {
+            const year = document.getElementById('filterYearProduct').value;
+            const quarter = document.getElementById('filterQuarterProduct').value;
+            const region = document.getElementById('filterRegionProduct').value;
+            const product = document.getElementById('filterProductProduct').value;
+            const retailer = document.getElementById('filterRetailerProduct').value;
+            const salesMethod = document.getElementById('filterSalesMethodProduct').value;
+
+            currentFiltersProduct = {};
+            if (year) currentFiltersProduct.year = year;
+            if (quarter) currentFiltersProduct.quarter = quarter;
+            if (region) currentFiltersProduct.region = region;
+            if (product) currentFiltersProduct.product = product;
+            if (retailer) currentFiltersProduct.retailer = retailer;
+            if (salesMethod) currentFiltersProduct.sales_method = salesMethod;
+
+            updateFilterStatusProduct();
+
+            document.querySelectorAll('#product-analysis .chart-card').forEach(card => {
+                card.classList.add('chart-loading');
+            });
+
+            document.getElementById('applyFiltersProduct').disabled = true;
+            document.getElementById('resetFiltersProduct').disabled = true;
+
+            loadProductCharts().then(() => {
+                document.querySelectorAll('#product-analysis .chart-card').forEach(card => {
+                    card.classList.remove('chart-loading');
+                });
+
+                document.getElementById('applyFiltersProduct').disabled = false;
+                document.getElementById('resetFiltersProduct').disabled = false;
+            });
+        }
+
+        function resetFiltersProduct() {
+            document.getElementById('filterYearProduct').value = '';
+            document.getElementById('filterQuarterProduct').value = '';
+            document.getElementById('filterRegionProduct').value = '';
+            document.getElementById('filterProductProduct').value = '';
+            document.getElementById('filterRetailerProduct').value = '';
+            document.getElementById('filterSalesMethodProduct').value = '';
+
+            currentFiltersProduct = {};
+
+            updateFilterStatusProduct();
+
+            document.querySelectorAll('#product-analysis .chart-card').forEach(card => {
+                card.classList.add('chart-loading');
+            });
+
+            document.getElementById('applyFiltersProduct').disabled = true;
+            document.getElementById('resetFiltersProduct').disabled = true;
+
+            loadProductCharts().then(() => {
+                document.querySelectorAll('#product-analysis .chart-card').forEach(card => {
+                    card.classList.remove('chart-loading');
+                });
+
+                document.getElementById('applyFiltersProduct').disabled = false;
+                document.getElementById('resetFiltersProduct').disabled = false;
+            });
+        }
+
+        function updateFilterStatusProduct() {
+            const filterCount = Object.keys(currentFiltersProduct).length;
+            const statusElement = document.getElementById('filterStatusProduct');
+
+            if (filterCount === 0) {
+                statusElement.textContent = 'No filters applied';
+                statusElement.className = 'text-muted ms-3';
+            } else {
+                statusElement.textContent = `${filterCount} filter${filterCount > 1 ? 's' : ''} applied`;
+                statusElement.className = 'text-success ms-3 fw-bold';
+            }
+        }
+
+        function getFilterQueryStringProduct() {
+            const params = new URLSearchParams(currentFiltersProduct);
+            return params.toString() ? '?' + params.toString() : '';
+        }
+
         async function loadProductCharts() {
             try {
+                const filterQuery = getFilterQueryStringProduct();
                 await Promise.all([
-                    loadChart('{{ url_for('api.product_revenue_profit') }}', 'product-revenue-profit-chart'),
-                    loadChart('{{ url_for('api.product_profitability_matrix') }}', 'product-profitability-matrix-chart'),
-                    loadChart('{{ url_for('api.product_by_sales_channel') }}', 'product-by-sales-channel-chart'),
-                    loadChart('{{ url_for('api.product_price_distribution') }}', 'product-price-distribution-chart'),
-                    loadChart('{{ url_for('api.product_sales_trend') }}', 'product-sales-trend-chart'),
-                    loadChart('{{ url_for('api.product_regional_mix') }}', 'product-regional-mix-chart')
+                    loadChart('{{ url_for('api.product_revenue_profit') }}' + filterQuery, 'product-revenue-profit-chart'),
+                    loadChart('{{ url_for('api.product_profitability_matrix') }}' + filterQuery, 'product-profitability-matrix-chart'),
+                    loadChart('{{ url_for('api.product_by_sales_channel') }}' + filterQuery, 'product-by-sales-channel-chart'),
+                    loadChart('{{ url_for('api.product_price_distribution') }}' + filterQuery, 'product-price-distribution-chart'),
+                    loadChart('{{ url_for('api.product_sales_trend') }}' + filterQuery, 'product-sales-trend-chart'),
+                    loadChart('{{ url_for('api.product_regional_mix') }}' + filterQuery, 'product-regional-mix-chart')
                 ]);
                 console.log('All product charts loaded successfully!');
             } catch (error) {
