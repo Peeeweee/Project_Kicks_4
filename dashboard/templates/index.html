@@ -116,23 +116,23 @@
 
                 <!-- Charts Rows for Sales Overview -->
                 <div class="row g-3 mb-4">
-                    <div class="col-lg-8"><div class="chart-card"><div id="sales-trend-chart" class="chart-container"></div></div></div>
-                    <div class="col-lg-4"><div class="chart-card"><div id="region-chart" class="chart-container"></div></div></div>
+                    <div class="col-lg-8"><div class="chart-card interactive-chart" data-chart="sales-trend-chart"><div id="sales-trend-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
+                    <div class="col-lg-4"><div class="chart-card interactive-chart" data-chart="region-chart"><div id="region-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
                 <div class="row g-3 mb-4">
-                    <div class="col-lg-6"><div class="chart-card"><div id="product-chart" class="chart-container"></div></div></div>
-                    <div class="col-lg-6"><div class="chart-card"><div id="retailer-chart" class="chart-container"></div></div></div>
+                    <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="product-chart"><div id="product-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
+                    <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="retailer-chart"><div id="retailer-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
                 <div class="row g-3 mb-4">
-                    <div class="col-lg-4"><div class="chart-card"><div id="sales-method-chart" class="chart-container"></div></div></div>
-                    <div class="col-lg-8"><div class="chart-card"><div id="top-states-chart" class="chart-container"></div></div></div>
+                    <div class="col-lg-4"><div class="chart-card interactive-chart" data-chart="sales-method-chart"><div id="sales-method-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
+                    <div class="col-lg-8"><div class="chart-card interactive-chart" data-chart="top-states-chart"><div id="top-states-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
                 <div class="row g-3 mb-4">
-                    <div class="col-lg-6"><div class="chart-card"><div id="margin-chart" class="chart-container"></div></div></div>
-                    <div class="col-lg-6"><div class="chart-card"><div id="quarterly-chart" class="chart-container"></div></div></div>
+                    <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="margin-chart"><div id="margin-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
+                    <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="quarterly-chart"><div id="quarterly-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
                 <div class="row g-3 mb-4">
-                    <div class="col-12"><div class="chart-card"><div id="price-distribution-chart" class="chart-container"></div></div></div>
+                    <div class="col-12"><div class="chart-card interactive-chart" data-chart="price-distribution-chart"><div id="price-distribution-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
             </div>
             
@@ -140,14 +140,14 @@
             <!-- Customer Patterns Content -->
             <div id="customer-patterns">
                 <div class="row g-3 mb-4">
-                    <div class="col-lg-6"><div class="chart-card"><div id="sales-by-retailer-chart" class="chart-container"></div></div></div>
-                    <div class="col-lg-6"><div class="chart-card"><div id="sales-by-sales-method-chart" class="chart-container"></div></div></div>
+                    <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="sales-by-retailer-chart"><div id="sales-by-retailer-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
+                    <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="sales-by-sales-method-chart"><div id="sales-by-sales-method-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
                 <div class="row g-3 mb-4">
-                    <div class="col-lg-12"><div class="chart-card"><div id="sales-by-state-chart" class="chart-container"></div></div></div>
+                    <div class="col-lg-12"><div class="chart-card interactive-chart" data-chart="sales-by-state-chart"><div id="sales-by-state-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
                 <div class="row g-3 mb-4">
-                    <div class="col-lg-12"><div class="chart-card"><div id="sales-by-day-of-week-chart" class="chart-container"></div></div></div>
+                    <div class="col-lg-12"><div class="chart-card interactive-chart" data-chart="sales-by-day-of-week-chart"><div id="sales-by-day-of-week-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
             </div>
             
@@ -200,18 +200,18 @@
 
                 <!-- Product Charts -->
                 <div class="row g-3 mb-4">
-                    <div class="col-lg-12"><div class="chart-card"><div id="product-revenue-profit-chart" class="chart-container"></div></div></div>
+                    <div class="col-lg-12"><div class="chart-card interactive-chart" data-chart="product-revenue-profit-chart"><div id="product-revenue-profit-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
                 <div class="row g-3 mb-4">
-                    <div class="col-lg-6"><div class="chart-card"><div id="product-profitability-matrix-chart" class="chart-container"></div></div></div>
-                    <div class="col-lg-6"><div class="chart-card"><div id="product-by-sales-channel-chart" class="chart-container"></div></div></div>
+                    <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="product-profitability-matrix-chart"><div id="product-profitability-matrix-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
+                    <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="product-by-sales-channel-chart"><div id="product-by-sales-channel-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
                 <div class="row g-3 mb-4">
-                    <div class="col-lg-12"><div class="chart-card"><div id="product-sales-trend-chart" class="chart-container"></div></div></div>
+                    <div class="col-lg-12"><div class="chart-card interactive-chart" data-chart="product-sales-trend-chart"><div id="product-sales-trend-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
                 <div class="row g-3 mb-4">
-                    <div class="col-lg-6"><div class="chart-card"><div id="product-price-distribution-chart" class="chart-container"></div></div></div>
-                    <div class="col-lg-6"><div class="chart-card"><div id="product-regional-mix-chart" class="chart-container"></div></div></div>
+                    <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="product-price-distribution-chart"><div id="product-price-distribution-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
+                    <div class="col-lg-6"><div class="chart-card interactive-chart" data-chart="product-regional-mix-chart"><div id="product-regional-mix-chart" class="chart-container"></div><div class="chart-overlay"><i class="fas fa-expand-alt"></i><span>Click to view details</span></div></div></div>
                 </div>
             </div>
 
@@ -429,6 +429,39 @@
         </footer>
     </div>
 
+    <!-- Chart Info Modal -->
+    <div class="modal fade" id="chartModal" tabindex="-1" aria-labelledby="chartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title" id="chartModalLabel"><i class="fas fa-chart-line me-2"></i><span id="modalChartTitle">Chart Details</span></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="chart-preview-container" id="modalChartPreview">
+                                <!-- Chart will be rendered here -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="chart-info-panel">
+                                <h6 class="fw-bold mb-3"><i class="fas fa-info-circle me-2 text-primary"></i>Chart Information</h6>
+                                <div id="chartInfoContent">
+                                    <!-- Dynamic content will be inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times me-2"></i>Close</button>
+                    <button type="button" class="btn btn-primary" onclick="downloadChart()"><i class="fas fa-download me-2"></i>Download Chart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -537,6 +570,389 @@
                 }
             });
         });
+
+        // ============================================
+        // INTERACTIVE CHART FEATURES
+        // ============================================
+
+        // Chart Information Database
+        const chartInfo = {
+            'sales-trend-chart': {
+                title: 'Monthly Sales Trend',
+                description: 'Track sales performance over time to identify seasonal patterns and growth trends.',
+                insights: [
+                    'Visualizes total sales across all months',
+                    'Helps identify peak sales periods',
+                    'Shows year-over-year growth patterns',
+                    'Useful for forecasting future sales'
+                ],
+                type: 'Time Series Analysis',
+                bestFor: 'Tracking performance trends and identifying seasonality'
+            },
+            'region-chart': {
+                title: 'Sales by Region',
+                description: 'Compare sales performance across different geographic regions in the United States.',
+                insights: [
+                    'Shows regional sales distribution',
+                    'Identifies top-performing regions',
+                    'Helps optimize regional marketing strategies',
+                    'Reveals geographic market opportunities'
+                ],
+                type: 'Geographic Distribution',
+                bestFor: 'Regional performance comparison and market analysis'
+            },
+            'product-chart': {
+                title: 'Product Performance',
+                description: 'Analyze which product categories generate the most revenue and profit.',
+                insights: [
+                    'Compares performance across product lines',
+                    'Identifies best-selling categories',
+                    'Shows product revenue contribution',
+                    'Guides inventory and production decisions'
+                ],
+                type: 'Category Analysis',
+                bestFor: 'Product portfolio optimization and inventory planning'
+            },
+            'retailer-chart': {
+                title: 'Retailer Performance',
+                description: 'Evaluate sales performance across different retail partners.',
+                insights: [
+                    'Ranks retailers by sales volume',
+                    'Identifies key retail partnerships',
+                    'Shows retailer contribution to total sales',
+                    'Helps allocate resources to top partners'
+                ],
+                type: 'Partner Analysis',
+                bestFor: 'Retail partnership evaluation and resource allocation'
+            },
+            'sales-method-chart': {
+                title: 'Sales by Channel',
+                description: 'Compare performance across different sales channels (In-store, Outlet, Online).',
+                insights: [
+                    'Shows channel sales distribution',
+                    'Identifies most profitable channels',
+                    'Tracks omnichannel performance',
+                    'Guides channel investment decisions'
+                ],
+                type: 'Channel Distribution',
+                bestFor: 'Omnichannel strategy optimization'
+            },
+            'top-states-chart': {
+                title: 'Top States by Sales',
+                description: 'Identify which US states generate the highest sales volumes.',
+                insights: [
+                    'Ranks states by total sales',
+                    'Shows geographic sales concentration',
+                    'Identifies expansion opportunities',
+                    'Guides regional marketing budgets'
+                ],
+                type: 'Geographic Ranking',
+                bestFor: 'State-level market analysis and expansion planning'
+            },
+            'margin-chart': {
+                title: 'Operating Margin Analysis',
+                description: 'Analyze profitability margins across different dimensions.',
+                insights: [
+                    'Shows profit margin distribution',
+                    'Identifies high-margin opportunities',
+                    'Compares profitability across segments',
+                    'Helps optimize pricing strategies'
+                ],
+                type: 'Profitability Analysis',
+                bestFor: 'Margin optimization and pricing strategy'
+            },
+            'quarterly-chart': {
+                title: 'Quarterly Performance',
+                description: 'Track sales and profit performance by business quarters.',
+                insights: [
+                    'Shows quarterly trends and patterns',
+                    'Compares quarter-over-quarter performance',
+                    'Identifies seasonal business cycles',
+                    'Supports quarterly planning and forecasting'
+                ],
+                type: 'Temporal Aggregation',
+                bestFor: 'Quarterly reporting and business planning'
+            },
+            'price-distribution-chart': {
+                title: 'Price Point Distribution',
+                description: 'Analyze the distribution of products across different price ranges.',
+                insights: [
+                    'Shows price range distribution',
+                    'Identifies sweet spot pricing',
+                    'Reveals pricing strategy effectiveness',
+                    'Guides product positioning decisions'
+                ],
+                type: 'Pricing Analysis',
+                bestFor: 'Pricing strategy and product positioning'
+            },
+            // Customer Patterns Charts
+            'sales-by-retailer-chart': {
+                title: 'Sales by Retailer',
+                description: 'Comprehensive analysis of sales performance across all retail partners.',
+                insights: [
+                    'Identifies top-performing retail partners',
+                    'Shows retailer sales volume distribution',
+                    'Helps prioritize retail relationships',
+                    'Guides resource allocation to key partners'
+                ],
+                type: 'Retailer Analysis',
+                bestFor: 'Partner performance evaluation and strategic planning'
+            },
+            'sales-by-sales-method-chart': {
+                title: 'Sales by Method',
+                description: 'Compare customer purchasing behavior across different sales channels.',
+                insights: [
+                    'Breaks down sales by In-store, Outlet, and Online',
+                    'Identifies most popular shopping methods',
+                    'Reveals customer channel preferences',
+                    'Supports omnichannel strategy development'
+                ],
+                type: 'Channel Preference Analysis',
+                bestFor: 'Customer behavior insights and channel optimization'
+            },
+            'sales-by-state-chart': {
+                title: 'Geographic Sales Distribution',
+                description: 'Interactive map showing sales performance across all 50 US states.',
+                insights: [
+                    'Visualizes sales concentration by state',
+                    'Identifies high-value geographic markets',
+                    'Reveals untapped market opportunities',
+                    'Supports regional expansion planning'
+                ],
+                type: 'Geographic Heatmap',
+                bestFor: 'Regional market analysis and expansion strategy'
+            },
+            'sales-by-day-of-week-chart': {
+                title: 'Sales by Day of Week',
+                description: 'Analyze customer purchasing patterns across different days of the week.',
+                insights: [
+                    'Shows which days generate most sales',
+                    'Identifies weekly purchasing patterns',
+                    'Helps optimize staffing and inventory',
+                    'Guides promotional timing strategies'
+                ],
+                type: 'Temporal Pattern Analysis',
+                bestFor: 'Operational planning and marketing campaign timing'
+            },
+            // Product Analysis Charts
+            'product-revenue-profit-chart': {
+                title: 'Product Revenue & Profit Comparison',
+                description: 'Comprehensive view of revenue and profit performance across all product categories.',
+                insights: [
+                    'Compares revenue vs profit for each product line',
+                    'Identifies most profitable product categories',
+                    'Shows revenue-to-profit conversion rates',
+                    'Guides product portfolio optimization'
+                ],
+                type: 'Dual-Axis Comparison',
+                bestFor: 'Product profitability analysis and portfolio management'
+            },
+            'product-profitability-matrix-chart': {
+                title: 'Product Profitability Matrix',
+                description: 'Strategic matrix showing products positioned by units sold versus operating margin.',
+                insights: [
+                    'Visualizes high-volume vs high-margin products',
+                    'Identifies star performers and underperformers',
+                    'Reveals strategic product positioning',
+                    'Supports pricing and inventory decisions'
+                ],
+                type: 'Scatter Plot Matrix',
+                bestFor: 'Strategic product positioning and portfolio balance'
+            },
+            'product-by-sales-channel-chart': {
+                title: 'Product Performance by Sales Channel',
+                description: 'Breakdown of product sales across In-store, Outlet, and Online channels.',
+                insights: [
+                    'Shows which products sell best in each channel',
+                    'Identifies channel-product fit opportunities',
+                    'Reveals omnichannel performance patterns',
+                    'Guides channel-specific product strategies'
+                ],
+                type: 'Stacked Bar Analysis',
+                bestFor: 'Channel optimization and product placement strategy'
+            },
+            'product-sales-trend-chart': {
+                title: 'Product Sales Trends Over Time',
+                description: 'Time series analysis showing how each product category performs across months.',
+                insights: [
+                    'Tracks product performance trends monthly',
+                    'Identifies seasonal product patterns',
+                    'Shows which products are growing or declining',
+                    'Supports demand forecasting by product'
+                ],
+                type: 'Multi-Line Time Series',
+                bestFor: 'Product trend analysis and demand forecasting'
+            },
+            'product-price-distribution-chart': {
+                title: 'Product Price Distribution',
+                description: 'Distribution analysis of product pricing across all categories.',
+                insights: [
+                    'Shows price point distribution by product',
+                    'Identifies premium vs budget products',
+                    'Reveals pricing strategy effectiveness',
+                    'Guides price positioning decisions'
+                ],
+                type: 'Distribution Analysis',
+                bestFor: 'Pricing strategy and product tier positioning'
+            },
+            'product-regional-mix-chart': {
+                title: 'Product Mix by Region',
+                description: 'Regional breakdown showing which products perform best in each geographic area.',
+                insights: [
+                    'Shows regional product preferences',
+                    'Identifies geographic product opportunities',
+                    'Reveals regional demand patterns',
+                    'Supports regional inventory planning'
+                ],
+                type: 'Regional Heatmap',
+                bestFor: 'Regional product strategy and inventory allocation'
+            }
+        };
+
+        // Initialize interactive charts after DOM loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers to all interactive charts
+            const interactiveCharts = document.querySelectorAll('.interactive-chart');
+
+            interactiveCharts.forEach(chart => {
+                // Add click event
+                chart.addEventListener('click', function() {
+                    const chartId = this.getAttribute('data-chart');
+                    openChartModal(chartId);
+                });
+
+                // Add visual feedback on hover
+                chart.addEventListener('mouseenter', function() {
+                    this.classList.add('chart-hover-active');
+                });
+
+                chart.addEventListener('mouseleave', function() {
+                    this.classList.remove('chart-hover-active');
+                });
+            });
+        });
+
+        // Open chart in modal with information
+        function openChartModal(chartId) {
+            const info = chartInfo[chartId];
+            if (!info) return;
+
+            // Update modal title
+            document.getElementById('modalChartTitle').textContent = info.title;
+
+            // Update chart info panel
+            const infoContent = `
+                <div class="mb-4">
+                    <p class="text-muted">${info.description}</p>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold text-primary mb-2"><i class="fas fa-lightbulb me-2"></i>Key Insights</h6>
+                    <ul class="list-unstyled ms-3">
+                        ${info.insights.map(insight => `
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                ${insight}
+                            </li>
+                        `).join('')}
+                    </ul>
+                </div>
+
+                <div class="mb-3">
+                    <h6 class="fw-bold text-primary mb-2"><i class="fas fa-chart-pie me-2"></i>Chart Type</h6>
+                    <p class="ms-3 mb-0"><span class="badge bg-info">${info.type}</span></p>
+                </div>
+
+                <div class="alert alert-light border">
+                    <h6 class="fw-bold mb-2"><i class="fas fa-star me-2 text-warning"></i>Best For</h6>
+                    <p class="mb-0 small">${info.bestFor}</p>
+                </div>
+            `;
+            document.getElementById('chartInfoContent').innerHTML = infoContent;
+
+            // Clone the chart to modal
+            const originalChart = document.getElementById(chartId);
+            const modalChartPreview = document.getElementById('modalChartPreview');
+
+            if (originalChart) {
+                // Clear previous content
+                modalChartPreview.innerHTML = `<div id="modal-${chartId}" style="width: 100%; height: 500px;"></div>`;
+
+                // Get the Plotly data from original chart
+                setTimeout(() => {
+                    const originalPlot = document.getElementById(chartId);
+                    if (originalPlot && originalPlot.data && originalPlot.layout) {
+                        const config = {
+                            responsive: true,
+                            displayModeBar: true,
+                            displaylogo: false,
+                            modeBarButtonsToAdd: ['toImage'],
+                            toImageButtonOptions: {
+                                format: 'png',
+                                filename: chartId.replace('-chart', ''),
+                                height: 800,
+                                width: 1200,
+                                scale: 2
+                            }
+                        };
+                        Plotly.newPlot(`modal-${chartId}`, originalPlot.data, originalPlot.layout, config);
+                    }
+                }, 100);
+            }
+
+            // Show modal with animation
+            const modal = new bootstrap.Modal(document.getElementById('chartModal'));
+            modal.show();
+
+            // Add animation class
+            document.querySelector('.modal-content').classList.add('modal-zoom-in');
+        }
+
+        // Download chart function
+        function downloadChart() {
+            const modalContent = document.getElementById('modalChartPreview');
+            const chartElement = modalContent.querySelector('[id^="modal-"]');
+
+            if (chartElement) {
+                Plotly.downloadImage(chartElement, {
+                    format: 'png',
+                    width: 1200,
+                    height: 800,
+                    filename: 'chart_export'
+                });
+            }
+        }
+
+        // Add entrance animation when charts load
+        async function loadChart(apiUrl, chartId) {
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                const config = {
+                    responsive: true,
+                    displayModeBar: true,
+                    displaylogo: false,
+                    modeBarButtonsToRemove: ['pan2d', 'lasso2d', 'select2d']
+                };
+
+                await Plotly.newPlot(chartId, data.data, data.layout, config);
+
+                // Add loaded animation
+                const chartCard = document.querySelector(`[data-chart="${chartId}"]`);
+                if (chartCard) {
+                    chartCard.classList.add('chart-loaded');
+                }
+            } catch (error) {
+                console.error(`Error loading chart ${chartId}:`, error);
+                const chartContainer = document.getElementById(chartId);
+                if (chartContainer) {
+                    chartContainer.innerHTML = '<div class="alert alert-danger">Error loading chart. Please check the console and refresh the page.</div>';
+                }
+            }
+        }
     </script>
 </body>
 </html>

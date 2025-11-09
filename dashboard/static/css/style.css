@@ -884,3 +884,333 @@ body {
         padding: 0.4rem 0.8rem;
     }
 }
+
+/* ============================================
+   INTERACTIVE CHART FEATURES
+   ============================================ */
+
+/* Interactive Chart Base Styles */
+.interactive-chart {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Chart Overlay (appears on hover) */
+.chart-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 87, 184, 0.8) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.chart-overlay i {
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 1rem;
+    animation: pulse-icon 2s infinite;
+}
+
+.chart-overlay span {
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@keyframes pulse-icon {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Hover Effects */
+.interactive-chart:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 87, 184, 0.3);
+    border: 2px solid var(--info-color);
+}
+
+.interactive-chart:hover .chart-overlay {
+    opacity: 1;
+}
+
+/* Active/Click Effect */
+.interactive-chart:active {
+    transform: translateY(-5px) scale(1.01);
+    transition: all 0.1s ease;
+}
+
+/* Chart Loaded Animation */
+.chart-loaded {
+    animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered Animation Delay */
+.row .chart-card:nth-child(1) { animation-delay: 0.1s; }
+.row .chart-card:nth-child(2) { animation-delay: 0.2s; }
+.row .chart-card:nth-child(3) { animation-delay: 0.3s; }
+.row .chart-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Chart Hover Active State */
+.chart-hover-active {
+    box-shadow: 0 20px 50px rgba(0, 87, 184, 0.4) !important;
+    transform: translateY(-10px) scale(1.03) !important;
+}
+
+/* Modal Animations */
+.modal-zoom-in {
+    animation: zoomIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Modal Content Styles */
+.chart-preview-container {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1rem;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-info-panel {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 10px;
+    padding: 1.5rem;
+    height: 100%;
+    border-left: 4px solid var(--info-color);
+}
+
+.chart-info-panel h6 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.chart-info-panel .list-unstyled li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #dee2e6;
+    transition: all 0.2s ease;
+}
+
+.chart-info-panel .list-unstyled li:last-child {
+    border-bottom: none;
+}
+
+.chart-info-panel .list-unstyled li:hover {
+    padding-left: 0.5rem;
+    background: rgba(0, 87, 184, 0.05);
+    border-radius: 5px;
+}
+
+/* Modal Header */
+#chartModal .modal-header {
+    background: linear-gradient(135deg, #000000 0%, #0057B8 100%) !important;
+}
+
+/* Shine Effect on Hover */
+.interactive-chart::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+    z-index: 1;
+}
+
+.interactive-chart:hover::before {
+    opacity: 1;
+    animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* Ripple Effect on Click */
+.interactive-chart::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(0, 87, 184, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: 1;
+}
+
+.interactive-chart:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Glow Effect */
+.interactive-chart:hover {
+    box-shadow:
+        0 0 20px rgba(0, 87, 184, 0.4),
+        0 0 40px rgba(0, 87, 184, 0.2),
+        0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Pulse Animation for Interactive Indicator */
+@keyframes pulse-border {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 87, 184, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 87, 184, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 87, 184, 0);
+    }
+}
+
+.interactive-chart {
+    animation: pulse-border 3s infinite;
+}
+
+/* Smooth Transitions for All Chart Cards */
+.chart-card {
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .chart-overlay i {
+        font-size: 2rem;
+    }
+
+    .chart-overlay span {
+        font-size: 0.9rem;
+    }
+
+    .interactive-chart:hover {
+        transform: translateY(-5px) scale(1.01);
+    }
+
+    .chart-info-panel {
+        margin-top: 1rem;
+    }
+
+    .modal-xl {
+        max-width: 95% !important;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .interactive-chart:hover {
+        transform: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .chart-overlay {
+        opacity: 0;
+    }
+
+    .interactive-chart:active .chart-overlay {
+        opacity: 1;
+    }
+}
+
+/* Loading State Animation */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.chart-container:empty {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 25%,
+        #e0e0e0 50%,
+        #f0f0f0 75%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+    min-height: 400px;
+    border-radius: 8px;
+}
+
+/* Enhance Modal Backdrop */
+.modal-backdrop.show {
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Button Animations */
+.modal-footer .btn {
+    transition: all 0.3s ease;
+}
+
+.modal-footer .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-footer .btn:active {
+    transform: translateY(0);
+}
