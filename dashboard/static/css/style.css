@@ -165,6 +165,7 @@ body {
     color: var(--primary-color);
     margin-bottom: 0.25rem;
     line-height: 1;
+    transition: opacity 0.3s ease-in-out;
 }
 
 .kpi-description {

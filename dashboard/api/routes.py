@@ -48,6 +48,46 @@ def apply_filters(df):
 
     return filtered_df
 
+@bp.route('/kpis')
+def get_kpis():
+    """API endpoint for KPIs with filter support"""
+    df = current_app.df
+
+    # Apply filters
+    filtered_df = apply_filters(df)
+
+    # Calculate KPIs from filtered data
+    total_sales = filtered_df['Total Sales'].sum()
+    total_profit = filtered_df['Operating Profit'].sum()
+    total_units = filtered_df['Units Sold'].sum()
+    avg_margin = filtered_df['Operating Margin'].mean()
+    total_transactions = len(filtered_df)
+    num_products = filtered_df['Product'].nunique()
+    num_retailers = filtered_df['Retailer'].nunique()
+    num_regions = filtered_df['Region'].nunique()
+
+    # Format KPIs
+    kpis = {
+        'total_sales': float(total_sales),
+        'total_sales_formatted': f'${total_sales:,.0f}',
+        'total_profit': float(total_profit),
+        'total_profit_formatted': f'${total_profit:,.0f}',
+        'total_units': int(total_units),
+        'total_units_formatted': f'{total_units:,.0f}',
+        'avg_margin': float(avg_margin),
+        'avg_margin_formatted': f'{avg_margin:.1%}',
+        'total_transactions': total_transactions,
+        'total_transactions_formatted': f'{total_transactions:,}',
+        'num_products': num_products,
+        'num_products_formatted': str(num_products),
+        'num_retailers': num_retailers,
+        'num_retailers_formatted': str(num_retailers),
+        'num_regions': num_regions,
+        'num_regions_formatted': str(num_regions)
+    }
+
+    return jsonify(kpis)
+
 @bp.route('/sales-trend')
 def sales_trend():
     """API endpoint for sales trend over time"""
