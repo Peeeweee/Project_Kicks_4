@@ -38,13 +38,13 @@ def create_app():
         from .pages.sales import bp as sales_bp
         from .pages.product import bp as product_bp
         from .pages.customer import bp as customer_bp
-        from .pages.prediction import bp as prediction_bp
+        from .pages.ml_prediction import ml_prediction_bp
         from .pages.about import bp as about_bp
 
         app.register_blueprint(sales_bp)
         app.register_blueprint(product_bp)
         app.register_blueprint(customer_bp)
-        app.register_blueprint(prediction_bp)
+        app.register_blueprint(ml_prediction_bp)
         app.register_blueprint(about_bp)
 
     return app

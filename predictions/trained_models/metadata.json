@@ -1,0 +1,61 @@
+{
+  "retailers": [
+    "Amazon",
+    "Foot Locker",
+    "Kohl's",
+    "Sports Direct",
+    "Walmart",
+    "West Gear"
+  ],
+  "regions": [
+    "Midwest",
+    "Northeast",
+    "South",
+    "Southeast",
+    "West"
+  ],
+  "products": [
+    "Men's Apparel",
+    "Men's Athletic Footwear",
+    "Men's Street Footwear",
+    "Women's Apparel",
+    "Women's Athletic Footwear",
+    "Women's Street Footwear"
+  ],
+  "sales_methods": [
+    "In-store",
+    "Online",
+    "Outlet"
+  ],
+  "months": [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ],
+  "quarters": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "price_range": {
+    "min": 7.0,
+    "max": 110.0,
+    "avg": 45.21662520729685
+  },
+  "units_range": {
+    "min": 0,
+    "max": 1275,
+    "avg": 256.9300373134328,
+    "median": 176.0
+  }
+}

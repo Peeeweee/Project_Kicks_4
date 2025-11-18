@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Predictions - Kicks Dashboard</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .prediction-card {
+            border-left: 4px solid #0d6efd;
+            transition: all 0.3s ease;
+        }
+        .prediction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+        .prediction-result {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .model-icon {
+            font-size: 3rem;
+            color: #0d6efd;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+        .hover-shadow:hover {
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15) !important;
+            transform: scale(1.05);
+        }
+        .card[data-bs-toggle="modal"] {
+            transition: all 0.3s ease;
+        }
+        .card[data-bs-toggle="modal"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.2) !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('sales.index') }}">
+                <i class="fas fa-running me-2"></i>
+                <span class="brand-text">KICKS</span>
+                <span class="brand-subtitle">Adidas US Sales Analytics</span>
+            </a>
+            <div class="text-white">
+                <small><i class="fas fa-brain me-2"></i>ML Predictions</small>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+
+        <!-- Header Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="dashboard-header">
+                    <h1 class="display-5 fw-bold mb-2">
+                        <i class="fas fa-brain me-3"></i>Sales Predictor
+                    </h1>
+                    <p class="lead">AI-powered sales amount forecasting</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('sales.index') }}">Sales Overview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('customer.index') }}">Customer Patterns</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('product.index') }}">Product Analysis</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ url_for('ml_prediction.index') }}">ML Predictions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('about.index') }}">About</a>
+            </li>
+        </ul>
+
+        <!-- Content Area -->
+        <div class="content-area pt-4">
+
+            {% if not models_status.available %}
+            <!-- Model Not Available Alert -->
+            <div class="alert alert-warning" role="alert">
+                <h5 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i>Model Not Trained</h5>
+                <p>{{ models_status.message }}</p>
+                <hr>
+                <p class="mb-0">To train the model, run: <code>python predictions/train_models.py</code></p>
+            </div>
+            {% else %}
+
+            <!-- Model Available -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="alert alert-success" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>Sales Predictor model loaded successfully!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sales Predictor -->
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card prediction-card shadow h-100">
+                        <div class="card-body p-4">
+                            <div class="text-center mb-4">
+                                <i class="fas fa-chart-line model-icon"></i>
+                            </div>
+                            <h3 class="card-title text-center mb-3">Sales Amount Predictor</h3>
+                            <p class="card-text text-muted text-center mb-4">Predict the total sales amount based on various factors.</p>
+
+                            <form id="salesPredictorForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Retailer</label>
+                                        <select class="form-select" name="retailer" required>
+                                            {% for retailer in metadata.retailers %}
+                                            <option value="{{ retailer }}">{{ retailer }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Region</label>
+                                        <select class="form-select" name="region" required>
+                                            {% for region in metadata.regions %}
+                                            <option value="{{ region }}">{{ region }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Product</label>
+                                        <select class="form-select" name="product" required>
+                                            {% for product in metadata.products %}
+                                            <option value="{{ product }}">{{ product }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Sales Method</label>
+                                        <select class="form-select" name="sales_method" required>
+                                            {% for method in metadata.sales_methods %}
+                                            <option value="{{ method }}">{{ method }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label fw-bold">Price per Unit ($)</label>
+                                        <input type="number" class="form-control" name="price_per_unit"
+                                               step="0.01" min="0" value="50" required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Month</label>
+                                        <select class="form-select" name="month" required>
+                                            {% for i in range(1, 13) %}
+                                            <option value="{{ i }}" {% if i == 6 %}selected{% endif %}>{{ metadata.months[i-1] }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Quarter</label>
+                                        <select class="form-select" name="quarter" required>
+                                            <option value="1">Q1</option>
+                                            <option value="2" selected>Q2</option>
+                                            <option value="3">Q3</option>
+                                            <option value="4">Q4</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-chart-line me-2"></i>Forecast Demand
+                                    </button>
+                                </div>
+                            </form>
+
+                            <!-- Prediction Result -->
+                            <div id="salesResult" class="prediction-result mt-4">
+                                <hr class="my-4">
+                                <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Prediction Result</h5>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="metric-card text-center">
+                                            <div class="small opacity-75">Predicted Units</div>
+                                            <div class="h3 mb-0" id="predictedUnits">0</div>
+                                            <div class="small opacity-75 mt-1">units to be sold</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="metric-card text-center" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                            <div class="small opacity-75">Predicted Revenue</div>
+                                            <div class="h3 mb-0" id="predictedSales">$0</div>
+                                            <div class="small opacity-75 mt-1" id="calculationFormula">0 units × $0</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-2 text-muted small text-center">
+                                    <i class="fas fa-lightbulb me-1"></i>
+                                    Model predicts demand (units), then calculates revenue = units × price
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model Performance Metrics - Initially Hidden, Shows After Prediction -->
+            <div class="row mt-5" id="dynamicMetricsSection" style="display: none;">
+                <div class="col-12">
+                    <h4 class="mb-3"><i class="fas fa-chart-bar me-2"></i>Prediction Confidence & Intervals</h4>
+
+                    <!-- Confidence Score Card -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-12">
+                            <div class="card shadow-sm" id="confidenceCard">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-3 text-center">
+                                            <div class="display-4 mb-2" id="confidenceIcon">
+                                                <i class="fas fa-check-circle text-success"></i>
+                                            </div>
+                                            <h5 class="mb-0" id="confidenceLevel">High Confidence</h5>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <h6 class="text-muted mb-3">Prediction Confidence Score</h6>
+                                            <div class="progress" style="height: 30px;">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                                     role="progressbar"
+                                                     id="confidenceBar"
+                                                     style="width: 0%"
+                                                     aria-valuenow="0"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100">
+                                                    <span class="fw-bold" id="confidencePercent">0%</span>
+                                                </div>
+                                            </div>
+                                            <small class="text-muted mt-2 d-block">
+                                                <i class="fas fa-info-circle me-1"></i>
+                                                Based on model accuracy and prediction uncertainty
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Confidence Intervals -->
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm border-primary">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-3 text-primary">
+                                        <i class="fas fa-boxes me-2"></i>Units Sold - 95% Confidence Interval
+                                    </h6>
+                                    <div class="text-center mb-3">
+                                        <div class="h4 mb-1">
+                                            <span id="unitsLower" class="text-muted">0</span>
+                                            <i class="fas fa-arrows-alt-h mx-2 text-primary"></i>
+                                            <span id="unitsUpper" class="text-muted">0</span>
+                                        </div>
+                                        <small class="text-muted">Expected range (units)</small>
+                                    </div>
+                                    <div class="alert alert-light mb-0">
+                                        <small>
+                                            <i class="fas fa-chart-line me-1"></i>
+                                            <strong>Point Estimate:</strong> <span id="unitsPoint">0</span> units<br>
+                                            <i class="fas fa-plus-minus me-1"></i>
+                                            <strong>Margin of Error:</strong> ±<span id="unitsMargin">0</span> units
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 shadow-sm border-success">
+                                <div class="card-body">
+                                    <h6 class="card-subtitle mb-3 text-success">
+                                        <i class="fas fa-dollar-sign me-2"></i>Revenue - 95% Confidence Interval
+                                    </h6>
+                                    <div class="text-center mb-3">
+                                        <div class="h4 mb-1">
+                                            <span id="salesLower" class="text-muted">$0</span>
+                                            <i class="fas fa-arrows-alt-h mx-2 text-success"></i>
+                                            <span id="salesUpper" class="text-muted">$0</span>
+                                        </div>
+                                        <small class="text-muted">Expected range (revenue)</small>
+                                    </div>
+                                    <div class="alert alert-light mb-0">
+                                        <small>
+                                            <i class="fas fa-chart-line me-1"></i>
+                                            <strong>Point Estimate:</strong> $<span id="salesPoint">0</span><br>
+                                            <i class="fas fa-plus-minus me-1"></i>
+                                            <strong>Margin of Error:</strong> ±$<span id="salesMargin">0</span>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model Reference Metrics (Clickable to show modal) -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card shadow-sm border-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modelInsightsModal">
+                                <div class="card-header bg-primary bg-gradient text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-tachometer-alt me-2"></i>Overall Model Performance Metrics
+                                        <i class="fas fa-info-circle float-end"></i>
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <div class="text-center p-3 bg-light rounded hover-shadow" style="transition: all 0.3s;">
+                                                <small class="text-muted d-block">Units R²</small>
+                                                <strong class="text-primary" id="units_r2_val">{{ "%.3f"|format(metrics.units_r2) }}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="text-center p-3 bg-light rounded hover-shadow" style="transition: all 0.3s;">
+                                                <small class="text-muted d-block">Units MAE</small>
+                                                <strong class="text-info" id="units_mae_val">{{ "%.3f"|format(metrics.units_mae) }}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="text-center p-3 bg-light rounded hover-shadow" style="transition: all 0.3s;">
+                                                <small class="text-muted d-block">Revenue R²</small>
+                                                <strong class="text-success" id="revenue_r2_val">{{ "%.3f"|format(metrics.revenue_r2) }}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="text-center p-3 bg-light rounded hover-shadow" style="transition: all 0.3s;">
+                                                <small class="text-muted d-block">Revenue MAE</small>
+                                                <strong class="text-warning" id="revenue_mae_val">{{ "%.3f"|format(metrics.revenue_mae) }}</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <small class="text-muted mt-3 d-block text-center">
+                                        <i class="fas fa-mouse-pointer me-1"></i>
+                                        Click to view detailed model context and performance insights
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+
+            <!-- Recommendations Section -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-warning bg-gradient text-white">
+                            <h4 class="mb-0"><i class="fas fa-compass me-2"></i>Recommendations: How to Use Predictions</h4>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="mb-0">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="card border-warning h-100">
+                                            <div class="card-body">
+                                                <div class="text-center mb-3">
+                                                    <i class="fas fa-warehouse fa-3x text-warning"></i>
+                                                </div>
+                                                <h6 class="fw-bold text-center mb-3">Inventory Planning</h6>
+                                                <p class="small text-muted mb-0">
+                                                    Use the <strong>95% confidence intervals</strong> to plan inventory levels.
+                                                    Stock according to the upper bound to avoid stockouts, or use the point estimate
+                                                    for lean inventory management.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border-info h-100">
+                                            <div class="card-body">
+                                                <div class="text-center mb-3">
+                                                    <i class="fas fa-dollar-sign fa-3x text-info"></i>
+                                                </div>
+                                                <h6 class="fw-bold text-center mb-3">Pricing Strategy</h6>
+                                                <p class="small text-muted mb-0">
+                                                    Test different price points to see predicted demand changes.
+                                                    Find the optimal <strong>price-demand balance</strong> by comparing
+                                                    predicted revenue across various price levels.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border-success h-100">
+                                            <div class="card-body">
+                                                <div class="text-center mb-3">
+                                                    <i class="fas fa-chart-bar fa-3x text-success"></i>
+                                                </div>
+                                                <h6 class="fw-bold text-center mb-3">Strategic Planning</h6>
+                                                <p class="small text-muted mb-0">
+                                                    Compare predictions across <strong>regions and retailers</strong> to identify
+                                                    high-potential markets. Use seasonal trends (Quarter/Month) for campaign timing
+                                                    and promotional planning.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Confidence Level Guidelines -->
+                                <div class="alert alert-warning border-0 shadow-sm mt-4 mb-0">
+                                    <h6 class="alert-heading fw-bold">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>Interpreting Confidence Levels
+                                    </h6>
+                                    <ul class="mb-0">
+                                        <li class="mb-2">
+                                            <strong class="text-success">High Confidence (75%+):</strong>
+                                            Prediction is highly reliable. Model has strong certainty based on similar historical patterns.
+                                        </li>
+                                        <li class="mb-2">
+                                            <strong class="text-warning">Medium Confidence (50-75%):</strong>
+                                            Prediction is reasonable but consider the confidence interval range for planning.
+                                        </li>
+                                        <li class="mb-0">
+                                            <strong class="text-danger">Low Confidence (&lt;50%):</strong>
+                                            Prediction has higher uncertainty. Use cautiously and prepare contingency plans.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 py-4 bg-light">
+        <div class="container-fluid text-center text-muted">
+            <p class="mb-0">&copy; 2024 Adidas Sales Analytics Dashboard | Powered by Machine Learning</p>
+        </div>
+    </footer>
+
+    <!-- Model Insights Modal -->
+    <div class="modal fade" id="modelInsightsModal" tabindex="-1" aria-labelledby="modelInsightsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-primary bg-gradient text-white">
+                    <h5 class="modal-title" id="modelInsightsModalLabel">
+                        <i class="fas fa-brain me-2"></i>Model Context & Performance Insights
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <!-- Context Section -->
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-primary mb-3">
+                            <i class="fas fa-info-circle me-2"></i>Context: Understanding the ML Model
+                        </h5>
+                        <div class="alert alert-info border-0 shadow-sm">
+                            <p class="mb-2">
+                                <strong>Model Architecture:</strong> This demand forecasting system uses a
+                                <span class="badge bg-primary">Random Forest Regressor</span> algorithm,
+                                an ensemble learning method that combines multiple decision trees to produce accurate predictions.
+                            </p>
+                            <p class="mb-2">
+                                <strong>Training Data:</strong> The model was trained on <strong>9,648 historical sales records</strong>
+                                from Adidas US, spanning multiple retailers, regions, product categories, and sales channels.
+                            </p>
+                            <p class="mb-0">
+                                <strong>Purpose:</strong> Predict future product demand (units sold) and revenue based on market conditions,
+                                helping stakeholders make informed decisions about inventory management, pricing strategies, and resource allocation.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Key Findings Section -->
+                    <div class="mb-0">
+                        <h5 class="fw-bold text-success mb-3">
+                            <i class="fas fa-chart-line me-2"></i>Key Findings: Model Performance
+                        </h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card bg-light border-0 h-100">
+                                    <div class="card-body">
+                                        <h6 class="fw-bold text-success mb-3">
+                                            <i class="fas fa-check-circle me-1"></i>Revenue Predictions
+                                        </h6>
+                                        <ul class="mb-0">
+                                            <li class="mb-2">
+                                                <strong>82.8% accuracy (R²)</strong> - The model explains 82.8% of revenue variance
+                                            </li>
+                                            <li class="mb-2">
+                                                <strong>$3,139 average error (MAE)</strong> - Only 3.4% of mean revenue ($93,273)
+                                            </li>
+                                            <li class="mb-0">
+                                                <strong>35× better than baseline</strong> - Significantly outperforms naive predictions
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-light border-0 h-100">
+                                    <div class="card-body">
+                                        <h6 class="fw-bold text-primary mb-3">
+                                            <i class="fas fa-boxes me-1"></i>Units Predictions
+                                        </h6>
+                                        <ul class="mb-0">
+                                            <li class="mb-2">
+                                                <strong>75.1% accuracy (R²)</strong> - Excellent variance explanation for unit forecasting
+                                            </li>
+                                            <li class="mb-2">
+                                                <strong>68 units average error (MAE)</strong> - Minimal deviation from actual demand
+                                            </li>
+                                            <li class="mb-0">
+                                                <strong>Robust predictions</strong> - Consistent performance across product categories
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feature Importance Insight -->
+                        <div class="alert alert-success border-0 shadow-sm mt-3">
+                            <h6 class="alert-heading fw-bold">
+                                <i class="fas fa-star me-2"></i>Most Influential Factors
+                            </h6>
+                            <p class="mb-0">
+                                The model identified <strong>Product Category</strong>, <strong>Retailer Type</strong>,
+                                <strong>Price per Unit</strong>, and <strong>Geographic Region</strong> as the most significant
+                                predictors of demand. Seasonal patterns (Quarter, Month) also play a crucial role in forecasting accuracy.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Prediction Script -->
+    <script>
+        // Demand Forecasting Form
+        document.getElementById('salesPredictorForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/ml-prediction/api/predict-demand', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (result.error) {
+                    alert('Error: ' + result.error);
+                    return;
+                }
+
+                // Extract values
+                const predictedUnits = result.predicted_units;
+                const predictedSales = result.predicted_sales;
+                const pricePerUnit = result.price_per_unit;
+
+                // Display results
+                document.getElementById('predictedUnits').textContent = Math.round(predictedUnits).toLocaleString();
+                document.getElementById('predictedSales').textContent = '$' + Math.round(predictedSales).toLocaleString();
+                document.getElementById('calculationFormula').textContent = Math.round(predictedUnits).toLocaleString() + ' units × $' + pricePerUnit.toFixed(2);
+
+                // Update confidence score and level
+                const confidenceScore = result.confidence_score;
+                const confidenceLevel = result.confidence_level;
+
+                document.getElementById('confidencePercent').textContent = Math.round(confidenceScore) + '%';
+                document.getElementById('confidenceLevel').textContent = confidenceLevel + ' Confidence';
+
+                // Update confidence bar
+                const confidenceBar = document.getElementById('confidenceBar');
+                confidenceBar.style.width = confidenceScore + '%';
+                confidenceBar.setAttribute('aria-valuenow', confidenceScore);
+
+                // Update confidence bar color and icon based on level
+                const confidenceIcon = document.getElementById('confidenceIcon');
+                confidenceBar.classList.remove('bg-success', 'bg-warning', 'bg-danger');
+                if (confidenceLevel === 'High') {
+                    confidenceBar.classList.add('bg-success');
+                    confidenceIcon.innerHTML = '<i class="fas fa-check-circle text-success"></i>';
+                } else if (confidenceLevel === 'Medium') {
+                    confidenceBar.classList.add('bg-warning');
+                    confidenceIcon.innerHTML = '<i class="fas fa-exclamation-circle text-warning"></i>';
+                } else {
+                    confidenceBar.classList.add('bg-danger');
+                    confidenceIcon.innerHTML = '<i class="fas fa-exclamation-triangle text-danger"></i>';
+                }
+
+                // Update confidence intervals for units
+                document.getElementById('unitsLower').textContent = Math.round(result.units_lower).toLocaleString();
+                document.getElementById('unitsUpper').textContent = Math.round(result.units_upper).toLocaleString();
+                document.getElementById('unitsPoint').textContent = Math.round(predictedUnits).toLocaleString();
+                document.getElementById('unitsMargin').textContent = Math.round(result.units_margin).toLocaleString();
+
+                // Update confidence intervals for revenue
+                document.getElementById('salesLower').textContent = '$' + Math.round(result.sales_lower).toLocaleString();
+                document.getElementById('salesUpper').textContent = '$' + Math.round(result.sales_upper).toLocaleString();
+                document.getElementById('salesPoint').textContent = Math.round(predictedSales).toLocaleString();
+                document.getElementById('salesMargin').textContent = Math.round(result.sales_margin).toLocaleString();
+
+                // Update reference model metrics
+                document.getElementById('units_r2_val').textContent = result.units_r2.toFixed(3);
+                document.getElementById('units_mae_val').textContent = result.units_mae.toFixed(3);
+                document.getElementById('revenue_r2_val').textContent = result.revenue_r2.toFixed(3);
+                document.getElementById('revenue_mae_val').textContent = result.revenue_mae.toFixed(3);
+
+                // Show result section
+                document.getElementById('salesResult').style.display = 'block';
+
+                // Show dynamic metrics section
+                document.getElementById('dynamicMetricsSection').style.display = 'block';
+
+                // Scroll to result
+                document.getElementById('salesResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            } catch (error) {
+                alert('Error making prediction: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

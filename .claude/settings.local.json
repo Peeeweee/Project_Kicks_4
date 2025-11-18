@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(dir:*)",
+      "Bash(tee:*)",
+      "Bash(timeout 3 cmd:*)",
+      "Bash(curl:*)",
+      "Bash(timeout 10 cmd /c \"ping localhost -n 3 > nul && curl -s http://localhost:8502 2>&1 | head -5\")",
+      "Bash(timeout 5 bash:*)",
+      "Bash(pkill:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(taskkill /F /IM python.exe)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

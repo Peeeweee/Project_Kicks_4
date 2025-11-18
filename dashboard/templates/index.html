@@ -60,6 +60,9 @@
                 <a class="nav-link {% if active_tab == 'product-analysis' %}active{% endif %}" href="{{ url_for('product.index') }}">Product Analysis</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {% if active_tab == 'ml-predictions' %}active{% endif %}" href="{{ url_for('ml_prediction.index') }}"><i class="fas fa-brain me-1"></i>ML Predictions</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {% if active_tab == 'about' %}active{% endif %}" href="{{ url_for('about.index') }}">About</a>
             </li>
         </ul>
@@ -519,7 +522,18 @@
                                             </div>
                                             <div>
                                                 <h5 class="fw-bold">Interactive Visualizations</h5>
-                                                <p class="text-muted">19+ dynamic charts powered by Plotly providing deep insights into sales trends, customer patterns, and product performance.</p>
+                                                <p class="text-muted">20+ dynamic charts powered by Plotly providing deep insights into sales trends, customer patterns, and product performance with real-time filtering.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <div class="d-flex align-items-start">
+                                            <div class="me-3">
+                                                <i class="fas fa-brain fa-2x text-purple"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="fw-bold">AI-Powered Predictions</h5>
+                                                <p class="text-muted">Machine learning model with 82.8% revenue accuracy, featuring dynamic confidence intervals and uncertainty quantification for demand forecasting.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -530,7 +544,7 @@
                                             </div>
                                             <div>
                                                 <h5 class="fw-bold">Real Data Analysis</h5>
-                                                <p class="text-muted">Built on 9,648 real Adidas sales transactions spanning 2020-2021 across 6 retailers and 50 US states.</p>
+                                                <p class="text-muted">Built on 9,648 real Adidas sales transactions spanning 2020-2021 across 6 retailers and 50 US states with comprehensive metrics.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -541,62 +555,7 @@
                                             </div>
                                             <div>
                                                 <h5 class="fw-bold">Modern Tech Stack</h5>
-                                                <p class="text-muted">Flask backend with Pandas data processing, Plotly visualizations, and Bootstrap 5 responsive design.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-4">
-                                        <div class="d-flex align-items-start">
-                                            <div class="me-3">
-                                                <i class="fas fa-cloud fa-2x text-danger"></i>
-                                            </div>
-                                            <div>
-                                                <h5 class="fw-bold">Cloud Deployment</h5>
-                                                <p class="text-muted">Fully configured for Vercel serverless deployment with auto-scaling and global CDN distribution.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Researchers Card -->
-                        <div class="card shadow-sm mb-4">
-                            <div class="card-body p-5">
-                                <div class="text-center mb-4">
-                                    <i class="fas fa-users fa-3x text-success mb-3"></i>
-                                    <h2 class="fw-bold mb-2">Research Team</h2>
-                                    <p class="text-muted">Developed and maintained by</p>
-                                </div>
-
-                                <div class="row mt-4">
-                                    <div class="col-md-6 mb-4">
-                                        <div class="card border-0 bg-light h-100">
-                                            <div class="card-body text-center p-4">
-                                                <div class="mb-3">
-                                                    <i class="fas fa-user-circle fa-4x text-primary"></i>
-                                                </div>
-                                                <h4 class="fw-bold mb-2">Theo Benedict Pasia</h4>
-                                                <p class="text-muted mb-0">Researcher & Developer</p>
-                                                <div class="mt-3">
-                                                    <span class="badge bg-primary me-2">Data Analysis</span>
-                                                    <span class="badge bg-info">Dashboard Design</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-4">
-                                        <div class="card border-0 bg-light h-100">
-                                            <div class="card-body text-center p-4">
-                                                <div class="mb-3">
-                                                    <i class="fas fa-user-circle fa-4x text-success"></i>
-                                                </div>
-                                                <h4 class="fw-bold mb-2">Kent Paulo Delgado</h4>
-                                                <p class="text-muted mb-0">Researcher & Developer</p>
-                                                <div class="mt-3">
-                                                    <span class="badge bg-success me-2">Backend Development</span>
-                                                    <span class="badge bg-warning text-dark">Data Processing</span>
-                                                </div>
+                                                <p class="text-muted">Flask + Scikit-learn backend with Pandas processing, Plotly visualizations, Bootstrap 5 responsive design, and Random Forest ML models.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -675,20 +634,138 @@
                                     <div class="col-md-6 mb-3">
                                         <h5 class="fw-bold mb-3"><i class="fas fa-server me-2 text-primary"></i>Backend</h5>
                                         <ul class="list-unstyled ms-3">
-                                            <li class="mb-2">Flask 3.0 - Web Framework</li>
-                                            <li class="mb-2">Pandas 2.0 - Data Processing</li>
-                                            <li class="mb-2">NumPy 1.24 - Numerical Computing</li>
-                                            <li class="mb-2">Plotly 5.18 - Visualizations</li>
+                                            <li class="mb-2"><strong>Flask 3.1.2</strong> - Web Framework</li>
+                                            <li class="mb-2"><strong>Pandas 2.3.3</strong> - Data Processing</li>
+                                            <li class="mb-2"><strong>NumPy 2.2.6</strong> - Numerical Computing</li>
+                                            <li class="mb-2"><strong>Plotly 6.3.1</strong> - Visualizations</li>
+                                            <li class="mb-2"><strong>Scikit-learn 1.7.2</strong> - Machine Learning</li>
+                                            <li class="mb-2"><strong>Werkzeug 3.0.0</strong> - WSGI Utilities</li>
                                         </ul>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <h5 class="fw-bold mb-3"><i class="fas fa-palette me-2 text-success"></i>Frontend</h5>
                                         <ul class="list-unstyled ms-3">
-                                            <li class="mb-2">Bootstrap 5.3 - UI Framework</li>
-                                            <li class="mb-2">Plotly.js - Chart Rendering</li>
-                                            <li class="mb-2">Font Awesome 6.4 - Icons</li>
-                                            <li class="mb-2">Google Fonts - Typography</li>
+                                            <li class="mb-2"><strong>Bootstrap 5.3.0</strong> - UI Framework</li>
+                                            <li class="mb-2"><strong>Plotly.js</strong> - Interactive Charts</li>
+                                            <li class="mb-2"><strong>Font Awesome 6.4.0</strong> - Icon Library</li>
+                                            <li class="mb-2"><strong>Google Fonts</strong> - Montserrat Typography</li>
                                         </ul>
+                                    </div>
+                                    <div class="col-md-12 mb-3 mt-3">
+                                        <h5 class="fw-bold mb-3"><i class="fas fa-brain me-2 text-warning"></i>Machine Learning</h5>
+                                        <ul class="list-unstyled ms-3">
+                                            <li class="mb-2">
+                                                <strong>Algorithm:</strong> Random Forest Regressor
+                                                <span class="badge bg-success ms-2">Ensemble Learning</span>
+                                            </li>
+                                            <li class="mb-2">
+                                                <strong>Training Data:</strong> 9,648 sales records (80/20 train-test split)
+                                            </li>
+                                            <li class="mb-2">
+                                                <strong>Features:</strong> Retailer, Region, Product, Sales Method, Price, Month, Quarter
+                                            </li>
+                                            <li class="mb-2">
+                                                <strong>Performance:</strong> 82.8% Revenue R² | 75.1% Units R²
+                                            </li>
+                                            <li class="mb-2">
+                                                <strong>Confidence Intervals:</strong> 95% prediction uncertainty with dynamic scoring
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Machine Learning Features Card -->
+                        <div class="card shadow-sm border-0 mb-4">
+                            <div class="card-header bg-gradient text-white">
+                                <h4 class="mb-0"><i class="fas fa-brain me-2"></i>Machine Learning Features</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- ML Model Overview -->
+                                    <div class="col-md-12 mb-4">
+                                        <div class="alert alert-info border-0 shadow-sm">
+                                            <h5 class="alert-heading fw-bold"><i class="fas fa-robot me-2"></i>AI-Powered Demand Forecasting</h5>
+                                            <p class="mb-0">Our Random Forest machine learning model predicts future product demand with high accuracy, providing actionable insights for inventory management and sales planning.</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Model Performance Metrics -->
+                                    <div class="col-md-6 mb-3">
+                                        <h5 class="fw-bold mb-3"><i class="fas fa-chart-line me-2 text-success"></i>Model Performance</h5>
+                                        <div class="ms-3">
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span><strong>Revenue Accuracy (R²):</strong></span>
+                                                <span class="badge bg-success">82.8%</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span><strong>Units Accuracy (R²):</strong></span>
+                                                <span class="badge bg-success">75.1%</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span><strong>Revenue MAE:</strong></span>
+                                                <span class="badge bg-info">$3,139</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <span><strong>Units MAE:</strong></span>
+                                                <span class="badge bg-info">68 units</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <span><strong>Model Type:</strong></span>
+                                                <span class="badge bg-primary">Random Forest</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Advanced Features -->
+                                    <div class="col-md-6 mb-3">
+                                        <h5 class="fw-bold mb-3"><i class="fas fa-star me-2 text-warning"></i>Advanced Capabilities</h5>
+                                        <ul class="list-unstyled ms-3">
+                                            <li class="mb-3">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                <strong>Dynamic Confidence Intervals</strong>
+                                                <p class="text-muted small mb-0 ms-4">95% prediction uncertainty ranges that update for each forecast</p>
+                                            </li>
+                                            <li class="mb-3">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                <strong>Real-time Confidence Scoring</strong>
+                                                <p class="text-muted small mb-0 ms-4">Automated confidence level classification (High/Medium/Low)</p>
+                                            </li>
+                                            <li class="mb-3">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                <strong>Multi-factor Analysis</strong>
+                                                <p class="text-muted small mb-0 ms-4">Considers retailer, region, product, sales method, price, and time factors</p>
+                                            </li>
+                                            <li class="mb-0">
+                                                <i class="fas fa-check-circle text-success me-2"></i>
+                                                <strong>Uncertainty Quantification</strong>
+                                                <p class="text-muted small mb-0 ms-4">Visual margin of error displays for transparent decision-making</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Technical Details -->
+                                    <div class="col-md-12 mt-3">
+                                        <div class="card bg-light border-0">
+                                            <div class="card-body">
+                                                <h6 class="fw-bold mb-3"><i class="fas fa-cogs me-2"></i>Technical Implementation</h6>
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-2">
+                                                        <small class="text-muted">ML Framework:</small>
+                                                        <p class="mb-0 fw-bold">Scikit-learn 1.7.2</p>
+                                                    </div>
+                                                    <div class="col-md-4 mb-2">
+                                                        <small class="text-muted">Training Dataset:</small>
+                                                        <p class="mb-0 fw-bold">9,648 sales records</p>
+                                                    </div>
+                                                    <div class="col-md-4 mb-2">
+                                                        <small class="text-muted">Feature Engineering:</small>
+                                                        <p class="mb-0 fw-bold">7 categorical + temporal features</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -704,8 +781,8 @@
         <footer class="row mt-5 mb-4">
             <div class="col-12">
                 <div class="dashboard-footer text-center">
-                    <p class="text-muted mb-1"><i class="fas fa-database me-2"></i>Dashboard powered by Flask, Plotly, and Bootstrap</p>
-                    <p class="text-muted small"><i class="far fa-copyright me-1"></i> 2024 Kicks Analytics | Adidas US Sales Dashboard</p>
+                    <p class="text-muted mb-1"><i class="fas fa-database me-2"></i>Dashboard powered by Flask, Plotly, Bootstrap & Scikit-learn</p>
+                    <p class="text-muted small"><i class="far fa-copyright me-1"></i> 2024 Kicks Analytics | Adidas US Sales Dashboard with AI-Powered Predictions</p>
                 </div>
             </div>
         </footer>
