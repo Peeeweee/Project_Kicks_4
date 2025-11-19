@@ -19,7 +19,15 @@ def create_app():
         pass
 
     # Load the data and attach it to the app context
-    data_path = os.path.join(app.root_path, '..', 'data', 'adidas_sales_cleaned.csv')
+    # Use absolute path from project root for better compatibility with Vercel
+    import sys
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    data_path = os.path.join(project_root, 'data', 'adidas_sales_cleaned.csv')
+
+    # Verify the file exists
+    if not os.path.exists(data_path):
+        raise FileNotFoundError(f"Data file not found at: {data_path}")
+
     app.df = load_data(data_path)
     
     # Define color constants and attach to app context
