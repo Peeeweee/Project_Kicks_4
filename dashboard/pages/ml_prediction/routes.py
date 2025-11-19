@@ -19,12 +19,18 @@ USE_EXTERNAL_API = ML_API_URL is not None
 if not USE_EXTERNAL_API:
     # Local development - load predictor directly
     predictions_path = Path(__file__).parent.parent.parent.parent / "predictions"
-    sys.path.insert(0, str(predictions_path))
 
-    try:
-        from predictor import predictor
-        MODELS_AVAILABLE = predictor.models_exist()
-    except ImportError:
+    # Check if predictions folder exists (won't exist on Vercel)
+    if predictions_path.exists():
+        sys.path.insert(0, str(predictions_path))
+        try:
+            from predictor import predictor
+            MODELS_AVAILABLE = predictor.models_exist()
+        except ImportError:
+            MODELS_AVAILABLE = False
+            predictor = None
+    else:
+        # Predictions folder doesn't exist (probably on Vercel without ML_API_URL set)
         MODELS_AVAILABLE = False
         predictor = None
 else:

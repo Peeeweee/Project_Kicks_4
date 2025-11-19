@@ -77,14 +77,16 @@ Visit your API URL to verify it's working:
 
 ### 2.1 Verify .vercelignore Configuration
 
-The `.vercelignore` file already excludes the large ML model files (`.pkl` files are excluded). This is correct - keep it this way since the ML model will run on Render, not Vercel.
+The `.vercelignore` file excludes the entire ML-related folders since they're not needed on Vercel:
 
 Your `.vercelignore` should include:
 ```
-predictions/trained_models/*.pkl
+predictions/        # Entire ML prediction module (handled by external API)
+ml_api/            # ML API code (deployed separately to Render)
+data/              # Raw data files (not needed for production)
 ```
 
-This prevents the 63 MB model from being uploaded to Vercel. ✅ Already configured!
+This prevents the 63 MB model and ML dependencies from being uploaded to Vercel, keeping the deployment under 250 MB. ✅ Already configured!
 
 ### 2.2 Deploy to Vercel
 
