@@ -15,7 +15,14 @@
       "Bash(pip show:*)",
       "Bash(del check_model_structure.py)",
       "Bash(timeout 3 bash:*)",
-      "Bash(timeout 10 bash:*)"
+      "Bash(timeout 10 bash:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nFix Vercel deployment errors - improve error handling and path resolution\n\n- Fixed data file path resolution in dashboard/__init__.py using absolute paths\n- Added comprehensive error handling in run.py to catch and log initialization errors\n- Improved ml_prediction routes.py with better exception handling for predictor loading\n- All changes maintain backward compatibility with local development\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd comprehensive error logging for Vercel deployment debugging\n\n- Added detailed logging in dashboard/__init__.py to track file paths and loading\n- Shows project root, data path, and file listings if data file not found  \n- Simplified run.py error handling\n- Moved all app initialization inside try-except for better error tracking\n- All changes tested locally and working\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push)",
+      "Bash(git restore:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nFix Vercel deployment - update to compatible Flask version and Python runtime\n\n- Downgraded Flask from 3.0+ to 2.3.3 for Vercel compatibility\n- Pinned all dependencies to specific working versions\n- Added maxLambdaSize config and Python 3.11 specification to vercel.json\n- Created .gitignore to exclude pycache and local settings\n- This should resolve the ModuleNotFoundError: No module named ''flask''\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
