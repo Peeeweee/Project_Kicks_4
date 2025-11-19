@@ -77,14 +77,15 @@ Visit your API URL to verify it's working:
 
 ### 2.1 Verify .vercelignore Configuration
 
-The `.vercelignore` file excludes the entire ML-related folders since they're not needed on Vercel:
+The `.vercelignore` file excludes the ML-related folders since they're not needed on Vercel:
 
 Your `.vercelignore` should include:
 ```
 predictions/        # Entire ML prediction module (handled by external API)
 ml_api/            # ML API code (deployed separately to Render)
-data/              # Raw data files (not needed for production)
 ```
+
+**Note**: The `data/` folder with the CSV file IS included in deployment (needed for dashboard charts).
 
 This prevents the 63 MB model and ML dependencies from being uploaded to Vercel, keeping the deployment under 250 MB. ✅ Already configured!
 
