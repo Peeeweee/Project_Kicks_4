@@ -5,5 +5,4 @@ __pycache__/
 .claude/
 ml_api/
 predictions/
-requirements.txt
 SPLIT_DEPLOYMENT.md
