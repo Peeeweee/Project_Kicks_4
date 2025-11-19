@@ -11,3 +11,4 @@ analyze_model.py
 setup_ml_predictions.py
 test_app.py
 package-lock.json
+predictions/trained_models/*.pkl
