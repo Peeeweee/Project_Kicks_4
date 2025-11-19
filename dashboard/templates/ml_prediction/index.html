@@ -139,8 +139,8 @@
                             <form id="salesPredictorForm">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Retailer</label>
-                                        <select class="form-select" name="retailer" required>
+                                        <label for="retailer" class="form-label fw-bold">Retailer</label>
+                                        <select class="form-select" id="retailer" name="retailer" required aria-label="Select retailer">
                                             {% for retailer in metadata.retailers %}
                                             <option value="{{ retailer }}">{{ retailer }}</option>
                                             {% endfor %}
@@ -148,8 +148,8 @@
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Region</label>
-                                        <select class="form-select" name="region" required>
+                                        <label for="region" class="form-label fw-bold">Region</label>
+                                        <select class="form-select" id="region" name="region" required aria-label="Select region">
                                             {% for region in metadata.regions %}
                                             <option value="{{ region }}">{{ region }}</option>
                                             {% endfor %}
@@ -159,8 +159,8 @@
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Product</label>
-                                        <select class="form-select" name="product" required>
+                                        <label for="product" class="form-label fw-bold">Product</label>
+                                        <select class="form-select" id="product" name="product" required aria-label="Select product">
                                             {% for product in metadata.products %}
                                             <option value="{{ product }}">{{ product }}</option>
                                             {% endfor %}
@@ -168,8 +168,8 @@
                                     </div>
 
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Sales Method</label>
-                                        <select class="form-select" name="sales_method" required>
+                                        <label for="sales_method" class="form-label fw-bold">Sales Method</label>
+                                        <select class="form-select" id="sales_method" name="sales_method" required aria-label="Select sales method">
                                             {% for method in metadata.sales_methods %}
                                             <option value="{{ method }}">{{ method }}</option>
                                             {% endfor %}
@@ -179,24 +179,27 @@
 
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
-                                        <label class="form-label fw-bold">Price per Unit ($)</label>
-                                        <input type="number" class="form-control" name="price_per_unit"
-                                               step="0.01" min="0" value="50" required>
+                                        <label for="price_per_unit" class="form-label fw-bold">Price per Unit ($)</label>
+                                        <input type="number" class="form-control" id="price_per_unit" name="price_per_unit"
+                                               step="0.01" min="0" value="50" required
+                                               aria-label="Enter price per unit in dollars"
+                                               placeholder="50.00"
+                                               title="Enter the price per unit in dollars">
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Month</label>
-                                        <select class="form-select" name="month" required>
+                                        <label for="month" class="form-label fw-bold">Month</label>
+                                        <select class="form-select" id="month" name="month" required aria-label="Select month">
                                             {% for month in metadata.months %}
                                             <option value="{{ month }}" {% if month == 'June' %}selected{% endif %}>{{ month }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label fw-bold">Quarter</label>
-                                        <select class="form-select" name="quarter" required>
+                                        <label for="quarter" class="form-label fw-bold">Quarter</label>
+                                        <select class="form-select" id="quarter" name="quarter" required aria-label="Select quarter">
                                             <option value="1">Q1</option>
                                             <option value="2" selected>Q2</option>
                                             <option value="3">Q3</option>
