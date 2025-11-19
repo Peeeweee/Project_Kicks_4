@@ -9,12 +9,19 @@ from flask import render_template, jsonify, request, current_app
 from . import ml_prediction_bp
 import sys
 import os
-import requests
 from pathlib import Path
+
+# Import requests only if needed (avoid errors during Vercel build)
+try:
+    import requests
+    REQUESTS_AVAILABLE = True
+except ImportError:
+    REQUESTS_AVAILABLE = False
+    requests = None
 
 # Check if we should use external ML API (for Vercel deployment)
 ML_API_URL = os.environ.get('ML_API_URL', None)
-USE_EXTERNAL_API = ML_API_URL is not None
+USE_EXTERNAL_API = ML_API_URL is not None and REQUESTS_AVAILABLE
 
 # Try to load local predictor (for local development)
 MODELS_AVAILABLE = False
@@ -23,27 +30,31 @@ metadata = None
 
 if not USE_EXTERNAL_API:
     # Local development - load predictor directly
-    predictions_path = Path(__file__).parent.parent.parent.parent / "predictions"
-    if predictions_path.exists():
-        sys.path.insert(0, str(predictions_path))
-        try:
-            from predictor import predictor as pred
-            predictor = pred
-            MODELS_AVAILABLE = predictor.models_exist()
-            if MODELS_AVAILABLE:
-                metadata = predictor.get_metadata()
-        except ImportError as e:
-            print(f"Failed to load local predictor: {e}")
+    try:
+        predictions_path = Path(__file__).parent.parent.parent.parent / "predictions"
+        if predictions_path.exists():
+            sys.path.insert(0, str(predictions_path))
+            try:
+                from predictor import predictor as pred
+                predictor = pred
+                MODELS_AVAILABLE = predictor.models_exist()
+                if MODELS_AVAILABLE:
+                    metadata = predictor.get_metadata()
+            except ImportError as e:
+                print(f"Failed to load local predictor: {e}")
+    except Exception as e:
+        print(f"Error initializing predictor: {e}")
 else:
     # Production - use external API
     try:
-        response = requests.get(f"{ML_API_URL}/api/check-models", timeout=5)
-        MODELS_AVAILABLE = response.json().get('available', False)
+        if REQUESTS_AVAILABLE:
+            response = requests.get(f"{ML_API_URL}/api/check-models", timeout=5)
+            MODELS_AVAILABLE = response.json().get('available', False)
 
-        # Get metadata from API
-        if MODELS_AVAILABLE:
-            metadata_response = requests.get(f"{ML_API_URL}/api/metadata", timeout=5)
-            metadata = metadata_response.json()
+            # Get metadata from API
+            if MODELS_AVAILABLE:
+                metadata_response = requests.get(f"{ML_API_URL}/api/metadata", timeout=5)
+                metadata = metadata_response.json()
     except Exception as e:
         print(f"Failed to connect to ML API: {e}")
         MODELS_AVAILABLE = False
