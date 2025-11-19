@@ -4,5 +4,10 @@ instance/
 __pycache__/
 .git/
 .gitignore
+.claude/
 create_snapshot.py
 project_snapshot.txt
+analyze_model.py
+setup_ml_predictions.py
+test_app.py
+package-lock.json
