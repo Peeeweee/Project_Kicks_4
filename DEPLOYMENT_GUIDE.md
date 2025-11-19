@@ -75,16 +75,16 @@ Visit your API URL to verify it's working:
 
 ## Step 2: Deploy Dashboard to Vercel
 
-### 2.1 Remove .pkl exclusion from .vercelignore
+### 2.1 Verify .vercelignore Configuration
 
-Since the ML model is now external, we can remove the .pkl exclusion:
+The `.vercelignore` file already excludes the large ML model files (`.pkl` files are excluded). This is correct - keep it this way since the ML model will run on Render, not Vercel.
 
-```bash
-# Edit .vercelignore and remove this line:
-# predictions/trained_models/*.pkl
+Your `.vercelignore` should include:
+```
+predictions/trained_models/*.pkl
 ```
 
-Or keep it excluded since Vercel won't use it anyway (it will call the external API).
+This prevents the 63 MB model from being uploaded to Vercel. ✅ Already configured!
 
 ### 2.2 Deploy to Vercel
 
