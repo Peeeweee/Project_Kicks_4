@@ -11,7 +11,11 @@
       "Bash(pkill:*)",
       "Bash(find:*)",
       "Bash(cat:*)",
-      "Bash(taskkill /F /IM python.exe)"
+      "Bash(taskkill /F /IM python.exe)",
+      "Bash(pip show:*)",
+      "Bash(del check_model_structure.py)",
+      "Bash(timeout 3 bash:*)",
+      "Bash(timeout 10 bash:*)"
     ],
     "deny": [],
     "ask": []

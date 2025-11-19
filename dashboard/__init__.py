@@ -9,6 +9,8 @@ def create_app():
     # Create the Flask app instance, specifying the top-level template folder
     app = Flask(__name__, instance_relative_config=True)
     app.config['SECRET_KEY'] = 'adidas-kicks-dashboard-2024'
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
     # Ensure the instance folder exists
     try:

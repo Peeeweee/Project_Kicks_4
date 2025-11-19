@@ -90,9 +90,15 @@ def train_units_predictor(df):
     print(f"  RMSE: {rmse_lr:.2f} units")
     print(f"  R2: {r2_lr:.4f} ({r2_lr*100:.2f}%)")
 
-    # Train Random Forest for comparison
-    print("\n[TRAINING] Random Forest model (for comparison)...")
-    model_rf = RandomForestRegressor(n_estimators=100, random_state=RANDOM_STATE, n_jobs=-1)
+    # Train Random Forest for comparison (using optimized hyperparameters)
+    print("\n[TRAINING] Random Forest model (optimized hyperparameters)...")
+    model_rf = RandomForestRegressor(
+        n_estimators=60,
+        max_depth=18,
+        min_samples_split=3,
+        random_state=RANDOM_STATE,
+        n_jobs=-1
+    )
     model_rf.fit(X_train, y_train)
 
     y_pred_rf = model_rf.predict(X_test)
@@ -217,16 +223,16 @@ def save_metadata(df):
         'months': ['January', 'February', 'March', 'April', 'May', 'June',
                    'July', 'August', 'September', 'October', 'November', 'December'],
         'quarters': [1, 2, 3, 4],
-        'price_range': {
-            'min': float(df['Price per Unit'].min()),
-            'max': float(df['Price per Unit'].max()),
-            'avg': float(df['Price per Unit'].mean())
-        },
-        'units_range': {
-            'min': int(df['Units Sold'].min()),
-            'max': int(df['Units Sold'].max()),
-            'avg': float(df['Units Sold'].mean()),
-            'median': float(df['Units Sold'].median())
+        'min_price': float(df['Price per Unit'].min()),
+        'max_price': float(df['Price per Unit'].max()),
+        'model_version': '2.0_optimized',
+        'trained_date': datetime.now().isoformat(),
+        'hyperparameters': {
+            'n_estimators': 60,
+            'max_depth': 18,
+            'min_samples_split': 3,
+            'random_state': 42,
+            'n_jobs': -1
         }
     }
 

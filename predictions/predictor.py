@@ -51,7 +51,7 @@ class UnitsPredictor:
             product: Product name (e.g., 'Men\'s Athletic Footwear')
             sales_method: Sales method (e.g., 'In-store')
             price_per_unit: Price per unit (float)
-            month: Month number (1-12)
+            month: Month name (e.g., 'January') or number (1-12)
             quarter: Quarter number (1-4)
 
         Returns:
@@ -61,6 +61,19 @@ class UnitsPredictor:
             return {'error': 'Model not loaded'}
 
         try:
+            # Convert month name to number if needed
+            month_names = ['January', 'February', 'March', 'April', 'May', 'June',
+                          'July', 'August', 'September', 'October', 'November', 'December']
+
+            if isinstance(month, str):
+                # Month is a name, convert to number
+                if month in month_names:
+                    month_number = month_names.index(month) + 1
+                else:
+                    return {'error': f'Invalid month name: {month}'}
+            else:
+                # Month is already a number
+                month_number = int(month)
             # Encode categorical features
             features = []
             encoders = self.units_model['encoders']
@@ -73,7 +86,7 @@ class UnitsPredictor:
             # Add numerical features
             features.extend([
                 float(price_per_unit),
-                int(month),
+                month_number,
                 int(quarter)
             ])
 
